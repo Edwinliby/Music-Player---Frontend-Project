@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import MusicBar from './_components/musicBar'
 import { data } from '@/../public/data'
+import NowPlaying from './_components/NowPlaying';
 
 export default function page() {
     const [songs, setSongs] = useState(data);
@@ -22,7 +23,11 @@ export default function page() {
     };
 
     return (
-        <div className='relative h-full'>
+        <div className='relative h-full flex flex-col'>
+            {/* <div className='flex justify-end gap-2 px-6 py-4 h-full'>
+                <NowPlaying />
+            </div> */}
+
             <MusicBar
                 song={songs[currentIndex]}
                 onNext={nextSong}

@@ -11,7 +11,7 @@ export default function Page({ children }) {
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div
         className={`relative z-10 h-full bg-white md:rounded-l-4xl transition-all duration-300 overflow-hidden
-          ${isSidebarOpen ? "md:w-[80%] xl:w-[85%]" : "w-full md:w-[93%] xl:w-[95%]"}`}
+          ${isSidebarOpen ? "w-full md:w-[80%] xl:w-[85%]" : "w-full md:w-[93%] xl:w-[95%]"}`}
       >
         {children}
       </div>

@@ -143,7 +143,7 @@ export default function MusicBar({ song, onNext, onPrev }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="absolute bottom-0 left-0 w-full px-4 py-3 md:px-6 md:py-4 bg-white shadow-[0_-10px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4 md:gap-0 z-50"
+            className="w-full px-4 py-3 md:px-6 md:py-4 bg-white shadow-[0_-10px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4 md:gap-0 z-50"
         >
             {/* Song Info */}
             <div className="flex items-center gap-2 md:gap-4">
