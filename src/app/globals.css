@@ -10,9 +10,16 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
 
-
   --breakpoint-2xl: 100rem;
   --breakpoint-3xl: 120rem;
+
+  --animate-spin: spin 5s linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 html {
@@ -68,4 +75,36 @@ body {
   height: 4px;
   background: #13CA35;
   border-radius: 2px;
+}
+
+/* vertical scroll */
+.custom-scrollbar {
+  overflow-y: hidden;
+  position: relative;
+}
+
+.custom-scrollbar:hover,
+.custom-scrollbar:active {
+  overflow-y: auto;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* horizontal-scroll */
+.horizontal-scroll {
+  overflow-x: auto;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  height: 0px;
 }

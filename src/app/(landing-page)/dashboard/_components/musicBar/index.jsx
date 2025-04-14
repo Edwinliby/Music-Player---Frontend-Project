@@ -7,7 +7,6 @@ import {
     SkipBack,
     SkipForward,
     Heart,
-    HeartCrack,
     Shuffle,
     Volume1,
     VolumeX,
@@ -16,7 +15,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import { motion } from 'framer-motion';
 
-export default function MusicBar({ song, onNext, onPrev }) {
+export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingProp, onTogglePlay }) {
     const waveformRef = useRef(null);
     const wavesurferRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -27,6 +26,7 @@ export default function MusicBar({ song, onNext, onPrev }) {
     const [playOnLoad, setPlayOnLoad] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
+    
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
@@ -112,6 +112,7 @@ export default function MusicBar({ song, onNext, onPrev }) {
 
     const togglePlay = () => {
         wavesurferRef.current?.playPause();
+        onTogglePlay(); 
     };
 
     const toggleMute = () => setIsMuted((prev) => !prev);
@@ -161,7 +162,7 @@ export default function MusicBar({ song, onNext, onPrev }) {
             </div>
 
             {/* Controls and Visualizer */}
-            <div className="flex items-center gap-8 w-fit lg:w-full lg:max-w-2xl mx-auto">
+            <div className="flex items-center gap-8 w-fit xl:w-full xl:max-w-2xl mx-auto">
                 <div className="flex items-center gap-4">
                     <SkipBack size={20} onClick={handlePrev} className="cursor-pointer" />
                     <span
@@ -173,7 +174,7 @@ export default function MusicBar({ song, onNext, onPrev }) {
                     <SkipForward size={20} onClick={handleNext} className="cursor-pointer" />
                 </div>
                 {/* Wave Surfer */}
-                <div className="hidden lg:flex items-center w-full">
+                <div className="hidden xl:flex items-center w-full">
                     <span className="text-xs text-gray-600 min-w-[40px]">
                         {formatTime(currentTime)}
                     </span>
@@ -211,7 +212,7 @@ export default function MusicBar({ song, onNext, onPrev }) {
                     {liked ? (
                         <Heart className="text-red-500 fill-red-500" size={20} />
                     ) : (
-                        <HeartCrack size={20} className="text-gray-400" />
+                        <Heart className="text-gray-400" size={20} />
                     )}
                 </motion.div>
 
