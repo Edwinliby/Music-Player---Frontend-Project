@@ -1,5 +1,10 @@
-import Layout from './_components/layout';
+import { MusicPlayerProvider } from '@/context/MusicPlayerContext';
+import LayoutContent from './_components/layout'
 
 export default function RootLayout({ children }) {
-    return <Layout children={children} />
+    return (
+        <MusicPlayerProvider>
+            <LayoutContent>{children}</LayoutContent>
+        </MusicPlayerProvider>
+    )
 }

@@ -1,12 +1,13 @@
 'use client'
 
-import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/navigation' // ✅ NEW
 import { data } from '@/../public/artistData'
 import SearchBar from "@/app/components/SearchBar"
 import { FastAverageColor } from 'fast-average-color'
 import { motion } from 'framer-motion'
-import { Play } from 'lucide-react';
+import { Play } from 'lucide-react'
+import { useMusicPlayer } from '@/context/MusicPlayerContext'
 
 export default function Page() {
   const [colors, setColors] = useState({})
@@ -14,11 +15,11 @@ export default function Page() {
   const [isTouchDevice, setIsTouchDevice] = useState(false)
   const processedImages = useRef(new Set())
 
+  const { setCurrentIndex, setIsPlaying } = useMusicPlayer();
+  const router = useRouter(); // ✅ NEW
+
   useEffect(() => {
-    const checkTouch = () => {
-      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0)
-    }
-    checkTouch()
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0)
   }, [])
 
   const handleImageLoad = async (img, index) => {
@@ -34,8 +35,16 @@ export default function Page() {
     }
   }
 
+  const handlePlayAndNavigate = (index, item) => {
+    setCurrentIndex(index)
+    setIsPlaying(true)
+
+    const slug = item.author.toLowerCase().replace(/\s+/g, '-')
+    router.push(`/dashboard/artists/${slug}`)
+  }
+
   return (
-    <div className="h-screen flex flex-col justify-between px-4 md:px-6 pt-4 md:pt-0">
+    <div className="h-full flex flex-col justify-between px-4 md:px-6 pt-4 md:pt-0">
       <SearchBar />
       <div className="relative bottom-10 md:bottom-0 w-full h-[88%] overflow-hidden">
         <div className="custom-scrollbar h-full">
@@ -51,31 +60,13 @@ export default function Page() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   whileHover={{ scale: 1.02 }}
-                  onMouseEnter={() => {
-                    if (!isTouchDevice) setHoveredCard(index)
-                  }}
-                  onMouseLeave={() => {
-                    if (!isTouchDevice) setHoveredCard(null)
-                  }}
                 >
-                  <Link
-                    href={{
-                      pathname: `/dashboard/artists/${item.author.toLowerCase().replace(/\s+/g, '-')}`,
-                      query: {
-                        title: item.title,
-                        author: item.author,
-                        artistImg: item.artistImg,
-                        coverImg: item.coverImg,
-                        music: item.music,
-                        location: item.location,
-                        hear: item.hear,
-                        subSongs: JSON.stringify(item.subSongs),
-                      },
-                    }}
-                    className="flex flex-col justify-center items-center gap-2 group transition-all duration-300"
-                    style={{
-                      ['--glow-color']: colors[index] || 'transparent'
-                    }}
+                  <div
+                    className="flex flex-col justify-center items-center gap-2 group transition-all duration-300 cursor-pointer"
+                    style={{ ['--glow-color']: colors[index] || 'transparent' }}
+                    onMouseEnter={() => setHoveredCard(index)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                    onClick={() => handlePlayAndNavigate(index, item)} // ✅ NEW
                   >
                     <div className='relative'>
                       <img
@@ -83,9 +74,7 @@ export default function Page() {
                         alt={item.title}
                         draggable="false"
                         crossOrigin="anonymous"
-                        ref={(img) => {
-                          if (img) handleImageLoad(img, index)
-                        }}
+                        ref={(img) => img && handleImageLoad(img, index)}
                         className="w-[18rem] h-fit rounded-lg object-cover transition-shadow duration-500 group-hover:shadow-[0_0_25px_0px_var(--glow-color)]"
                       />
                       {(!isTouchDevice && hoveredCard === index) || isTouchDevice ? (
@@ -93,7 +82,7 @@ export default function Page() {
                       ) : null}
                     </div>
                     <p className="font-semibold text-gray-800">{item.author}</p>
-                  </Link>
+                  </div>
                 </motion.div>
               ))}
             </div>
