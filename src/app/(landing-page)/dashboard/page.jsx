@@ -33,13 +33,15 @@ export default function page() {
 
     return (
         <div className="h-screen flex flex-col justify-between">
-            <div className="overflow-hidden h-full px-4 md:px-6 py-4">
+            <div className="overflow-hidden h-full px-4 md:px-6">
                 <div className="h-full w-full flex justify-between gap-4">
-                    <div className='w-full lg:w-[75%] flex flex-col gap-4'>
+                    <div className='w-full lg:w-[75%] flex flex-col'>
                         <SearchBar />
                         <ArtistSection />
                     </div>
-                    <NowPlaying song={songs[currentIndex]} isPlaying={isPlaying} />
+                    <div className='hidden lg:block w-[14rem] xl:w-[25%] py-4'>
+                        <NowPlaying song={songs[currentIndex]} isPlaying={isPlaying} />
+                    </div>
                 </div>
             </div>
 

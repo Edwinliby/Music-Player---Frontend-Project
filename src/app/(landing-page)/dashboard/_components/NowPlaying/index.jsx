@@ -61,7 +61,7 @@ export default function NowPlaying({ song, isPlaying }) {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4 }}
-            className='hidden lg:block bg-[#fff] w-[14rem] xl:w-[25%] h-full rounded-2xl overflow-hidden shadow'
+            className='hidden lg:block bg-[#fff] w-full h-full rounded-2xl overflow-hidden shadow'
         >
             <div ref={topRef} className='h-fit'>
                 <h2 className='flex items-center gap-2 px-4 pt-4 pb-1 font-semibold'>

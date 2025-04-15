@@ -41,8 +41,8 @@ export default function SearchBar({ className }) {
 
   return (
     <>
-      <div className={`h-[12%] w-full flex items-center text-gray-400 gap-4 border-b border-gray-300 cursor-pointer ${className ? className : ''}`}>
-        <motion.a whileHover={{ color: "#1DB954" }} whileTap={{ scale: 0.9, color: "#1DB954" }} href='/dashboard'><House /></motion.a>
+      <div className={`h-[6.5%] md:h-[12%] pb-2 md:pb-0 w-full flex items-center text-gray-400 gap-4 border-b border-gray-300 cursor-pointer ${className ? className : ''}`}>
+        <motion.a whileHover={{ color: "#1DB954" }} whileTap={{ scale: 0.9, color: "#1DB954" }} className='cursor-pointer hidden md:block' href='/dashboard'><House /></motion.a>
         <div className='flex items-center justify-between gap-2 w-full group'>
           <Search />
           <input

@@ -49,9 +49,9 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
 
     useEffect(() => {
         if (!song?.music || !waveformRef.current) return;
-    
+
         let aborted = false;
-    
+
         const ws = WaveSurfer.create({
             container: waveformRef.current,
             waveColor: '#D9D9D9',
@@ -62,33 +62,33 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
             normalize: true,
             cursorColor: 'transparent',
         });
-    
+
         wavesurferRef.current = ws;
-    
+
         ws.on('play', () => setIsPlaying(true));
         ws.on('pause', () => setIsPlaying(false));
         ws.setVolume(isMuted ? 0 : volume);
-    
+
         ws.on('ready', () => {
             if (aborted) return;
             isWaveformReady.current = true;
             setDuration(ws.getDuration());
             if (playOnLoad) {
                 ws.play();
-                setPlayOnLoad(false);
+                // setPlayOnLoad(false);
             }
         });
-    
+
         ws.on('audioprocess', () => {
             if (aborted) return;
             setCurrentTime(ws.getCurrentTime());
         });
-    
+
         ws.on('seek', () => {
             if (aborted) return;
             setCurrentTime(ws.getCurrentTime());
         });
-    
+
         ws.on('finish', () => {
             if (aborted) return;
             if (shuffle) {
@@ -98,13 +98,13 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
             }
             setPlayOnLoad(true);
         });
-    
+
         try {
             ws.load(song.music);
         } catch (e) {
             console.error('Error loading song:', e);
         }
-    
+
         return () => {
             aborted = true;
             isWaveformReady.current = false;
@@ -158,12 +158,25 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
 
     if (!song) return null;
 
+    useEffect(() => {
+        if (!wavesurferRef.current || !isWaveformReady.current) return;
+        if (isPlayingProp) {
+            wavesurferRef.current.play();
+        } else {
+            wavesurferRef.current.pause();
+        }
+    }, [isPlayingProp]);
+
+    useEffect(() => {
+        setIsPlaying(isPlayingProp);
+    }, [isPlayingProp]);
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="w-full px-4 py-3 md:px-6 md:py-4 bg-white shadow-[0_-10px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4 md:gap-0 z-50"
+            className="relative bottom-14 md:bottom-0 w-full px-4 py-3 md:px-6 md:py-4 bg-white shadow-[0_-10px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4 md:gap-0 z-50"
         >
             {/* Song Info */}
             <div className="flex items-center gap-2 md:gap-4">

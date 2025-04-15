@@ -8,12 +8,12 @@ import TopArtist from './components/TopArtist'
 export default function Index() {
     return (
         <div className='w-full h-[88%] flex flex-col gap-4'>
-            <div className='custom-scrollbar overflow-x-hidden'>
+            <div className='custom-scrollbar overflow-x-hidden pt-4'>
                 <Banner />
                 <TopArtist data={data} />
 
                 {/* You may also like */}
-                <div className='custom-scrollbar h-[20rem]'>
+                <div className='custom-scrollbar h-[20rem] pb-6 md:pb-4'>
                     <h2 className='text-xl font-semibold sticky -top-0.5 z-10 bg-white py-2 pb-4'>
                         You may also like
                     </h2>

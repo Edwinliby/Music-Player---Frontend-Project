@@ -7,7 +7,7 @@ import SearchBar from '@/app/components/SearchBar'
 import { useSearchParams } from 'next/navigation'
 import Logo from '@/../public/logo.webp'
 import Image from 'next/image'
-import { Clock } from 'lucide-react'
+import { Clock, Play } from 'lucide-react'
 
 export default function ArtistPage() {
     const searchParams = useSearchParams()
@@ -20,6 +20,7 @@ export default function ArtistPage() {
 
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isPlaying, setIsPlaying] = useState(false)
+    const [hoveredIndex, setHoveredIndex] = useState(null)
 
     const handleNext = (mode = 'normal') => {
         if (mode === 'shuffle') {
@@ -39,7 +40,7 @@ export default function ArtistPage() {
     }
 
     const togglePlay = () => {
-        setIsPlaying((prev) => !prev)
+        setIsPlaying((prev) => !prev);
     }
 
     const currentSong = subSongs[currentIndex];
@@ -83,9 +84,20 @@ export default function ArtistPage() {
                                         <div
                                             key={index}
                                             className={`text-gray-600 flex items-center py-2 hover:bg-gray-100 px-4 md:px-6 cursor-pointer ${index === currentIndex ? 'bg-gray-100' : ''}`}
-                                            onClick={() => setCurrentIndex(index)}
+                                            onClick={() => {
+                                                setCurrentIndex(index)
+                                                // setIsPlaying(true)
+                                            }}
+                                            onMouseEnter={() => setHoveredIndex(index)}
+                                            onMouseLeave={() => setHoveredIndex(null)}
                                         >
-                                            <span className='w-8 text-left'>{index + 1}</span>
+                                            <span className='w-8 text-left'>
+                                                {hoveredIndex === index ? (
+                                                    <Play size={20} className='fill-gray-500 text-gray-500 relative -left-1.5' />
+                                                ) : (
+                                                    index + 1
+                                                )}
+                                            </span>
                                             <div className='flex-1 text-left flex items-center gap-1 md:gap-2'>
                                                 <img src={song.coverImg} alt={song.title} className='w-12 h-12 rounded object-cover' />
                                                 <div>
@@ -93,16 +105,18 @@ export default function ArtistPage() {
                                                     <p className='text-sm'>{author}</p>
                                                 </div>
                                             </div>
-                                            <span className='hidden md:block pr-8 lg:pr-0 lg:flex-1 text-left pl-1'>{song.album}</span>
-                                            <span className='hidden md:block pr-8 lg:pr-0 lg:flex-1 text-left'>{song.date}</span>
-                                            <span className='text-right'>{song.timestamp}</span>
+                                            <span className='hidden md:block pr-8 lg:pr-0 lg:flex-1 text-sm text-left pl-1'>{song.album}</span>
+                                            <span className='hidden md:block pr-8 lg:pr-0 lg:flex-1 text-sm text-left'>{song.date}</span>
+                                            <span className='text-sm text-right'>{song.timestamp}</span>
                                         </div>
                                     ))
                                 }
                             </div>
                         </div>
                     </div>
-                    <NowPlaying song={currentSong} isPlaying={isPlaying} />
+                    <div className='hidden lg:block w-[14rem] xl:w-[25%]'>
+                        <NowPlaying song={currentSong} isPlaying={isPlaying} />
+                    </div>
                 </div>
             </div>
 

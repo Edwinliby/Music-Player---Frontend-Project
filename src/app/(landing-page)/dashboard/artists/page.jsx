@@ -35,9 +35,9 @@ export default function Page() {
   }
 
   return (
-    <div className="h-screen flex flex-col  justify-between px-4 md:px-6">
+    <div className="h-screen flex flex-col justify-between px-4 md:px-6 pt-4 md:pt-0">
       <SearchBar />
-      <div className="w-full h-[88%] overflow-hidden">
+      <div className="relative bottom-10 md:bottom-0 w-full h-[88%] overflow-hidden">
         <div className="custom-scrollbar h-full">
           <div className='overflow-hidden'>
             <h2 className="text-2xl font-semibold py-4">
