@@ -58,7 +58,7 @@ export default function Page() {
         <div className="custom-scrollbar h-full">
           <div className='overflow-hidden'>
             <h2 className="text-2xl font-semibold py-4">
-              Best of artists
+              Best of Artists
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 mb-6">
               {data.map((item, index) => (

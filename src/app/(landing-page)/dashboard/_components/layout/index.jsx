@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Sidebar from "@/app/components/sidebar"
 import MusicBar from "../musicBar"
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
+import Profile from "@/app/components/Profile";
 
 function LayoutContent({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -27,6 +28,7 @@ function LayoutContent({ children }) {
   return (
     <div className="relative w-full h-screen flex justify-end bg-[url(/bg.webp)] bg-cover bg-center bg-no-repeat">
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <Profile isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div
         className={`relative z-10 h-full bg-white md:rounded-l-4xl transition-all duration-300 overflow-hidden
           ${isSidebarOpen ? "w-full md:w-[80%] xl:w-[85%]" : "w-full md:w-[93%] xl:w-[95%]"}`}
@@ -38,12 +40,12 @@ function LayoutContent({ children }) {
           >
             {children}
           </div>
-          <div ref={musicBarRef}>
+          <div ref={musicBarRef} className="z-50">
             <MusicBar
               song={currentSong}
+              isPlaying={isPlaying}
               onNext={nextSong}
               onPrev={prevSong}
-              isPlaying={isPlaying}
               onTogglePlay={handleTogglePlay}
             />
           </div>
