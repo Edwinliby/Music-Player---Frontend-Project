@@ -40,7 +40,15 @@ export default function Page() {
     setIsPlaying(true)
 
     const slug = item.author.toLowerCase().replace(/\s+/g, '-')
-    router.push(`/dashboard/artists/${slug}`)
+    const query = new URLSearchParams({
+      author: item.author,
+      title: item.title,
+      coverImg: item.coverImg,
+      hear: item.hear,
+      subSongs: JSON.stringify(item.subSongs),
+    })
+
+    router.push(`/dashboard/artists/${slug}?${query}`)
   }
 
   return (

@@ -8,6 +8,7 @@ import {
     SkipForward,
     Heart,
     Shuffle,
+    Repeat,
     Volume1,
     VolumeX,
 } from 'lucide-react';
@@ -15,7 +16,13 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import { motion } from 'framer-motion';
 
-export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingProp, onTogglePlay }) {
+export default function MusicBar({
+    song,
+    onNext,
+    onPrev,
+    isPlaying: isPlayingProp,
+    onTogglePlay,
+}) {
     const waveformRef = useRef(null);
     const wavesurferRef = useRef(null);
     const isWaveformReady = useRef(false);
@@ -23,11 +30,11 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
     const [isMuted, setIsMuted] = useState(false);
     const [volume, setVolume] = useState(1);
     const [liked, setLiked] = useState(false);
-    const [shuffle, setShuffle] = useState(false);
+    const [shuffleMode, setShuffleMode] = useState(false); // Shuffle mode state
+    const [loopMode, setLoopMode] = useState(false); // Loop mode state
     const [playOnLoad, setPlayOnLoad] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
@@ -75,7 +82,6 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
             setDuration(ws.getDuration());
             if (playOnLoad) {
                 ws.play();
-                // setPlayOnLoad(false);
             }
         });
 
@@ -91,10 +97,10 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
 
         ws.on('finish', () => {
             if (aborted) return;
-            if (shuffle) {
+            if (shuffleMode) {
                 onNext('shuffle');
             } else {
-                onNext?.();
+                onNext();
             }
             setPlayOnLoad(true);
         });
@@ -144,19 +150,15 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
 
     const toggleLike = () => setLiked((prev) => !prev);
 
-    const toggleShuffle = () => setShuffle((prev) => !prev);
-
     const handleNext = () => {
         setPlayOnLoad(true);
-        onNext?.();
+        onNext?.(shuffleMode ? 'shuffle' : loopMode ? 'loop' : 'normal');
     };
 
     const handlePrev = () => {
         setPlayOnLoad(true);
         onPrev?.();
     };
-
-    if (!song) return null;
 
     useEffect(() => {
         if (!wavesurferRef.current || !isWaveformReady.current) return;
@@ -225,16 +227,28 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
             </div>
 
             {/* Right Side: Shuffle, Like, Volume */}
-            <div className="hidden md:flex items-center gap-4">
-                <motion.div
-                    whileTap={{ scale: 0.9 }}
+            <div className="flex items-center gap-4">
+                {/* Shuffle */}
+                <motion.button
+                    whileTap={{ scale: 0.8 }}
                     whileHover={{ scale: 1.2 }}
-                    onClick={toggleShuffle}
-                    className={`cursor-pointer ${shuffle ? 'text-green-500' : 'text-gray-400'}`}
+                    onClick={() => setShuffleMode(!shuffleMode)}
+                    className={`cursor-pointer ${shuffleMode ? 'text-green-500' : 'text-gray-400'}`}
                 >
                     <Shuffle size={20} />
-                </motion.div>
+                </motion.button>
 
+                {/* Loop */}
+                <motion.button
+                    whileTap={{ scale: 0.8 }}
+                    whileHover={{ scale: 1.2 }}
+                    onClick={() => setLoopMode(!loopMode)}
+                    className={`cursor-pointer hidden md:block ${loopMode ? 'text-green-500' : 'text-gray-400'}`}
+                >
+                    <Repeat size={20} />
+                </motion.button>
+
+                {/* Like */}
                 <motion.div
                     whileTap={{ scale: 0.8 }}
                     whileHover={{ scale: 1.2 }}
@@ -248,7 +262,8 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
                     )}
                 </motion.div>
 
-                <div className="flex items-center gap-2">
+                {/* Volume */}
+                <div className="hidden md:flex items-center gap-2">
                     <span onClick={toggleMute} className="cursor-pointer">
                         {isMuted || volume === 0 ? <VolumeX size={20} /> : <Volume1 size={20} />}
                     </span>
