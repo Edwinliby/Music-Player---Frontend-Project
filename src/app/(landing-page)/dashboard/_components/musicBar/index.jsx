@@ -18,6 +18,7 @@ import { motion } from 'framer-motion';
 export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingProp, onTogglePlay }) {
     const waveformRef = useRef(null);
     const wavesurferRef = useRef(null);
+    const isWaveformReady = useRef(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [volume, setVolume] = useState(1);
@@ -26,7 +27,7 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
     const [playOnLoad, setPlayOnLoad] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    
+
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
@@ -47,58 +48,69 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
     }, [handleKeyDown]);
 
     useEffect(() => {
-        if (waveformRef.current && song?.music) {
-            if (wavesurferRef.current) {
-                wavesurferRef.current.destroy();
+        if (!song?.music || !waveformRef.current) return;
+    
+        let aborted = false;
+    
+        const ws = WaveSurfer.create({
+            container: waveformRef.current,
+            waveColor: '#D9D9D9',
+            progressColor: '#13CA35',
+            height: 30,
+            barWidth: 2,
+            responsive: true,
+            normalize: true,
+            cursorColor: 'transparent',
+        });
+    
+        wavesurferRef.current = ws;
+    
+        ws.on('play', () => setIsPlaying(true));
+        ws.on('pause', () => setIsPlaying(false));
+        ws.setVolume(isMuted ? 0 : volume);
+    
+        ws.on('ready', () => {
+            if (aborted) return;
+            isWaveformReady.current = true;
+            setDuration(ws.getDuration());
+            if (playOnLoad) {
+                ws.play();
+                setPlayOnLoad(false);
             }
-
-            wavesurferRef.current = WaveSurfer.create({
-                container: waveformRef.current,
-                waveColor: '#D9D9D9',
-                progressColor: '#13CA35',
-                height: 30,
-                barWidth: 2,
-                responsive: true,
-                normalize: true,
-                cursorColor: 'transparent',
-            });
-
-            wavesurferRef.current.load(song.music);
-
-            wavesurferRef.current.on('play', () => setIsPlaying(true));
-            wavesurferRef.current.on('pause', () => setIsPlaying(false));
-            wavesurferRef.current.setVolume(isMuted ? 0 : volume);
-
-            wavesurferRef.current.on('ready', () => {
-                setDuration(wavesurferRef.current.getDuration());
-                if (playOnLoad) {
-                    wavesurferRef.current?.play();
-                    setPlayOnLoad(false);
-                }
-            });
-
-            wavesurferRef.current.on('audioprocess', () => {
-                setCurrentTime(wavesurferRef.current.getCurrentTime());
-            });
-
-            wavesurferRef.current.on('seek', () => {
-                setCurrentTime(wavesurferRef.current.getCurrentTime());
-            });
-
-            wavesurferRef.current.on('finish', () => {
-                if (shuffle) {
-                    onNext('shuffle');
-                } else {
-                    onNext?.();
-                }
-                setPlayOnLoad(true);
-            });
-
-            return () => {
-                wavesurferRef.current?.destroy();
-            };
+        });
+    
+        ws.on('audioprocess', () => {
+            if (aborted) return;
+            setCurrentTime(ws.getCurrentTime());
+        });
+    
+        ws.on('seek', () => {
+            if (aborted) return;
+            setCurrentTime(ws.getCurrentTime());
+        });
+    
+        ws.on('finish', () => {
+            if (aborted) return;
+            if (shuffle) {
+                onNext('shuffle');
+            } else {
+                onNext?.();
+            }
+            setPlayOnLoad(true);
+        });
+    
+        try {
+            ws.load(song.music);
+        } catch (e) {
+            console.error('Error loading song:', e);
         }
-    }, [song]);
+    
+        return () => {
+            aborted = true;
+            isWaveformReady.current = false;
+            ws.destroy();
+        };
+    }, [song?.music]);
 
     useEffect(() => {
         setLiked(false);
@@ -111,8 +123,15 @@ export default function MusicBar({ song, onNext, onPrev, isPlaying: isPlayingPro
     }, [volume, isMuted]);
 
     const togglePlay = () => {
-        wavesurferRef.current?.playPause();
-        onTogglePlay(); 
+        if (!wavesurferRef.current) return;
+
+        if (isWaveformReady.current) {
+            wavesurferRef.current.playPause();
+        } else {
+            setPlayOnLoad(true);
+        }
+
+        onTogglePlay();
     };
 
     const toggleMute = () => setIsMuted((prev) => !prev);

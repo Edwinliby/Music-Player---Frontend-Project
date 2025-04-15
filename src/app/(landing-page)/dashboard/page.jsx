@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import MusicBar from './_components/musicBar'
-import { data } from '@/../public/data'
+import { data } from '@/../public/artistData'
 import NowPlaying from './_components/NowPlaying';
 import SearchBar from '@/app/components/SearchBar';
 import ArtistSection from './_components/ArtistSection';
@@ -10,6 +10,7 @@ import ArtistSection from './_components/ArtistSection';
 export default function page() {
     const [songs] = useState(data);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     const nextSong = (mode = 'normal') => {
         if (mode === 'shuffle') {
@@ -17,14 +18,14 @@ export default function page() {
             setCurrentIndex(randomIndex);
         } else {
             setCurrentIndex((prev) => (prev + 1) % songs.length);
+            setIsPlaying(true);
         }
     };
 
     const prevSong = () => {
         setCurrentIndex((prev) => (prev - 1 + songs.length) % songs.length);
+        setIsPlaying(true);
     };
-
-    const [isPlaying, setIsPlaying] = useState(false);
 
     const handleTogglePlay = () => {
         setIsPlaying((prev) => !prev);

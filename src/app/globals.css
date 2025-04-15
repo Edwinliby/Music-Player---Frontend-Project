@@ -93,7 +93,7 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -107,4 +107,10 @@ body {
 
 .horizontal-scroll::-webkit-scrollbar {
   height: 0px;
+}
+
+@media(width<600px) {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 0px;
+  }
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Music,
@@ -56,57 +57,59 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                     transition={{ delay: 0.1, duration: 0.3, ease: 'easeInOut' }}
                     className="flex flex-col gap-8"
                 >
-                    <SidebarItem icon={<ListMusic size={20} />} label="Playlists" isOpen={isOpen} />
-                    <SidebarItem icon={<Music size={20} />} label="Artists" isOpen={isOpen} />
-                    <SidebarItem icon={<Disc3 size={20} />} label="Albums" isOpen={isOpen} />
-                    <SidebarItem icon={<Podcast size={20} />} label="Podcasts" isOpen={isOpen} />
+                    <SidebarItem icon={<ListMusic size={20} />} label="Playlists" isOpen={isOpen} link="/" />
+                    <SidebarItem icon={<Music size={20} />} label="Artists" isOpen={isOpen} link="/dashboard/artists"/>
+                    <SidebarItem icon={<Disc3 size={20} />} label="Albums" isOpen={isOpen} link="/"/>
+                    <SidebarItem icon={<Podcast size={20} />} label="Podcasts" isOpen={isOpen} link="/"/>
                 </motion.div>
             </div>
 
             {/* Footer */}
-            <SidebarItem icon={<User size={20} />} label="Profile" isOpen={isOpen} />
+            <SidebarItem icon={<User size={20} />} label="Profile" isOpen={isOpen} link="/"/>
         </motion.div>
     )
 }
 
-function SidebarItem({ icon, label, isOpen }) {
+function SidebarItem({ icon, label, link, isOpen }) {
     const [hovered, setHovered] = useState(false);
 
     return (
-        <motion.div
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            whileTap={{ scale: 0.975 }}
-            className="relative flex items-center gap-4 cursor-pointer hover:opacity-80 h-4"
-        >
-            {icon}
+        <Link href={link} className="underline-none">
+            <motion.div
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+                whileTap={{ scale: 0.975 }}
+                className="relative flex items-center gap-4 cursor-pointer hover:opacity-80 h-4"
+            >
+                {icon}
 
-            {/* Show label if sidebar is open */}
-            {isOpen && (
-                <motion.span
-                    key="open-label"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
-                    transition={{ duration: 0.2 }}
-                >
-                    {label}
-                </motion.span>
-            )}
+                {/* Show label if sidebar is open */}
+                {isOpen && (
+                    <motion.span
+                        key="open-label"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -10 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        {label}
+                    </motion.span>
+                )}
 
-            {/* Show label if sidebar is closed and hovered */}
-            {!isOpen && hovered && (
-                <motion.span
-                    key="hover-label"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="text-xs absolute -left-4 -top-6 text-white bg-gray-900 backdrop-blur-2xl break-words px-2"
-                >
-                    {label}
-                </motion.span>
-            )}
-        </motion.div>
+                {/* Show label if sidebar is closed and hovered */}
+                {!isOpen && hovered && (
+                    <motion.span
+                        key="hover-label"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-xs absolute -left-4 -top-6 text-white bg-gray-900 backdrop-blur-2xl break-words px-2"
+                    >
+                        {label}
+                    </motion.span>
+                )}
+            </motion.div>
+        </Link>
     );
 }

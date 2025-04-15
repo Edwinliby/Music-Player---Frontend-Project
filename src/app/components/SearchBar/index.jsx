@@ -2,10 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Search, House } from "lucide-react"
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 
-export default function SearchBar() {
+export default function SearchBar({ className }) {
   const [isOpen, setIsOpen] = useState(false)
   const searchRef = useRef(null)
 
@@ -42,7 +41,7 @@ export default function SearchBar() {
 
   return (
     <>
-      <div className="h-[12%] w-full flex items-center text-gray-400 gap-4 border-b border-gray-300 cursor-pointer">
+      <div className={`h-[12%] w-full flex items-center text-gray-400 gap-4 border-b border-gray-300 cursor-pointer ${className ? className : ''}`}>
         <motion.a whileHover={{ color: "#1DB954" }} whileTap={{ scale: 0.9, color: "#1DB954" }} href='/dashboard'><House /></motion.a>
         <div className='flex items-center justify-between gap-2 w-full group'>
           <Search />

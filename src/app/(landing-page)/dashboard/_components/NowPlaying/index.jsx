@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, useMotionValue, AnimatePresence } from 'framer-motion'
+import { motion, useMotionValue } from 'framer-motion'
 import { CirclePlus, Check, AudioLines } from 'lucide-react'
 import Image from 'next/image'
 import Box from '@/../public/box.webp'
@@ -150,35 +150,43 @@ export default function NowPlaying({ song, isPlaying }) {
                         <p className='text-sm text-gray-600'>{song.location}</p>
                     </motion.div>
 
-                    <hr className='border-gray-300' />
+                    {song.subSongs?.length > 0 && (<hr className='border-gray-300' />)}
 
-                    <div className='flex flex-col gap-2 px-1'>
-                        <b className='px-2 xl:px-3 text-sm font-medium'>Other Songs</b>
-                        {song.other.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                className="flex items-center justify-between gap-2 xl:gap-4 active:bg-gray-200 hover:bg-gray-100 px-2 py-2 rounded"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                            >
-                                <div className="flex items-center gap-2 2xl:gap-4">
-                                    <Image
-                                        src={item.coverImg}
-                                        alt={item.title}
-                                        width={100}
-                                        height={100}
-                                        className="w-10 h-10 xl:w-14 xl:h-14 object-cover rounded-md bg-gray-300"
-                                    />
-                                    <div className="flex flex-col gap-1">
-                                        <b className="text-xs xl:text-sm font-medium">{item.title}</b>
-                                        <p className="text-[.7rem] xl:text-xs text-gray-500 pb-1">{item.author}</p>
-                                    </div>
-                                </div>
-                                <span className='text-xs text-gray-500'>{item.timestamp}</span>
-                            </motion.div>
-                        ))}
-                    </div>
+                    {
+                        song.subSongs?.length > 0 && (
+                            <div className='flex flex-col gap-2 px-1'>
+                                <b className='px-2 xl:px-3 text-sm font-medium'>Other Songs</b>
+                                {song.subSongs?.map((item, index) => (
+                                    <motion.div
+                                        key={index}
+                                        className="flex items-center justify-between gap-2 xl:gap-4 active:bg-gray-200 hover:bg-gray-100 px-2 py-2 rounded"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: index * 0.05 }}
+                                    >
+                                        <div className="flex items-center gap-2 2xl:gap-4">
+                                            <Image
+                                                src={item.coverImg}
+                                                alt={item.title}
+                                                width={100}
+                                                height={100}
+                                                className="w-10 h-10 xl:w-14 xl:h-14 object-cover rounded-md bg-gray-300"
+                                            />
+                                            <div className="flex flex-col gap-1">
+                                                <b className="text-xs xl:text-sm font-medium">{item.title}</b>
+                                                {
+                                                    item.featuring && (
+                                                        <p className="text-[.7rem] xl:text-xs text-gray-500 pb-1">feat. {item.featuring}</p>
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                        <span className='text-xs text-gray-500'>{item.timestamp}</span>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        )
+                    }
                 </motion.div>
             </div>
         </motion.div>
