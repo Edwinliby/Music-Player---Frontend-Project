@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F9F1E6;
+  --background: #ffffff;
   --foreground: #171717;
   --red: #BF301E;
 }
@@ -25,12 +25,15 @@
 html {
   max-width: 1920px;
   margin: auto;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-neue-montreal);
+  letter-spacing: .5px;
+  overflow-x: hidden;
 }
 
 .custom-slider {

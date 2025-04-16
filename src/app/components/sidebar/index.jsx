@@ -47,7 +47,11 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                                 {isOpen ? <PanelLeftClose /> : <PanelRightClose />}
                             </motion.div>
                         </AnimatePresence>
-                    ) : <Logs />}
+                    ) : <>
+                        {!isOpen && <PanelRightClose />}
+                    </>}
+
+                    {isOpen ? <img src="/mainWhiteLogo.webp" alt="logo" draggable={false} className='w-22 h-12 object-contain' /> : ""}
                 </div>
 
                 {/* Main Navigation */}

@@ -1,8 +1,8 @@
-import AboutSection from "./_components/aboutSection";
-import FooterSection from "./_components/footerSection";
-import HeroSection from "./_components/heroSection";
 import Navbar from "./_components/navbarSection";
+import HeroSection from "./_components/heroSection";
+import AboutSection from "./_components/aboutSection";
 import JoinSection from "./_components/joinSection";
+import FooterSection from "./_components/footerSection";
 
 export default function page() {
     return (
