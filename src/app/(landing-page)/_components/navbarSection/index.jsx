@@ -28,6 +28,7 @@ const socialLinks = [
 export default function Navbar() {
     const [isHidden, setIsHidden] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [hasScrolled, setHasScrolled] = useState(false);
 
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
@@ -39,7 +40,11 @@ export default function Navbar() {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
 
-            if (currentScrollY > lastScrollY) {
+            // Check if user scrolled past 180px
+            setHasScrolled(currentScrollY > 180);
+
+            // Hide nav when scrolling down
+            if (currentScrollY > lastScrollY && currentScrollY > 180) {
                 setIsHidden(true);
             } else {
                 setIsHidden(false);
@@ -53,8 +58,12 @@ export default function Navbar() {
     }, []);
 
     return (
-        <nav className={`fixed top-0 left-0 w-full px-4 md:px-6 lg:px-8 py-4 z-50 transition-all duration-300 flex items-center justify-between 
-        ${isHidden && !isOpen ? '-translate-y-full' : 'translate-y-0'}`}>
+        <nav
+            className={`fixed top-0 left-0 w-full px-4 md:px-6 lg:px-8 py-4 z-50 transition-all duration-300 flex items-center justify-between
+            ${isHidden && !isOpen ? '-translate-y-full' : 'translate-y-0'}
+            ${hasScrolled || isOpen ? 'bg-white' : 'bg-transparent'}
+             `}
+        >
             <Link href="/">
                 <Image
                     src={Logo}
@@ -72,7 +81,7 @@ export default function Navbar() {
                         href={item.link}
                         key={item.name}
                         aria-label="links"
-                        className={`font-medium hover:text-[var(--orange)] 2xl:text-xl`}
+                        className={`font-medium hover:text-[var(--orange)] 2xl:text-xl mix-blend-difference`}
                     >
                         {item.name}
                     </Link>

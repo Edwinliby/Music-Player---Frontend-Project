@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+
 import h1 from '@/../public/hero/h1.webp';
 import h2 from '@/../public/hero/h2.webp';
 import h3 from '@/../public/hero/h3.webp';
@@ -16,107 +17,120 @@ import h10 from '@/../public/hero/h10.webp';
 
 const imgData = [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10];
 
-const CENTER_BUFFER = 60;
-const GRID_COLS = 5;
-const GRID_ROWS = 4;
+const BUFFER = 60;
+const CENTER_BUFFER = 40;
+
+const isOverlappingCenter = (top, left, size, centerRect) => {
+    return (
+        left + size > centerRect.left - CENTER_BUFFER &&
+        left < centerRect.right + CENTER_BUFFER &&
+        top + size > centerRect.top - CENTER_BUFFER &&
+        top < centerRect.bottom + CENTER_BUFFER
+    );
+};
+
+const getRandomPosition = (usedPositions, imgSize, maxWidth, maxHeight, centerRect) => {
+    let tries = 0;
+    while (tries < 1000) {
+        const left = Math.random() * (maxWidth - imgSize);
+        const top = Math.random() * (maxHeight - imgSize);
+
+        const isTooCloseToOther = usedPositions.some(
+            (pos) =>
+                Math.abs(pos.left - left) < imgSize + BUFFER &&
+                Math.abs(pos.top - top) < imgSize + BUFFER
+        );
+
+        const isTooCloseToCenter = isOverlappingCenter(top, left, imgSize, centerRect);
+
+        if (!isTooCloseToOther && !isTooCloseToCenter) {
+            return { top, left };
+        }
+        tries++;
+    }
+    return { top: 0, left: 0 }; // fallback
+};
 
 export default function HeroSection() {
     const [positions, setPositions] = useState([]);
+    const [imgSize, setImgSize] = useState(100); // Default image size
+    const [numImages, setNumImages] = useState(imgData.length);
     const centerRef = useRef(null);
 
     useEffect(() => {
-        const imgSize = 300;
-        const usedCells = new Set();
-        const maxWidth = window.innerWidth;
-        const maxHeight = window.innerHeight;
-        const cellWidth = maxWidth / GRID_COLS;
-        const cellHeight = maxHeight / GRID_ROWS;
+        const handleResize = () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
 
-        const centerRect = centerRef.current?.getBoundingClientRect() || {
-            top: maxHeight / 3,
-            left: maxWidth / 3,
-            right: (maxWidth * 2) / 3,
-            bottom: (maxHeight * 2) / 3,
-        };
+            const isMobile = width < 640;
+            const size = isMobile ? 90 : 150;
+            setImgSize(size);
 
-        const isInCenter = (x, y) => {
-            const px = x * cellWidth;
-            const py = y * cellHeight;
-            return (
-                px + imgSize > centerRect.left - CENTER_BUFFER &&
-                px < centerRect.right + CENTER_BUFFER &&
-                py + imgSize > centerRect.top - CENTER_BUFFER &&
-                py < centerRect.bottom + CENTER_BUFFER
-            );
-        };
+            const imageCount = isMobile ? 8 : imgData.length;
+            setNumImages(imageCount);
 
-        const positions = [];
+            const used = [];
 
-        while (positions.length < imgData.length) {
-            const x = Math.floor(Math.random() * GRID_COLS);
-            const y = Math.floor(Math.random() * GRID_ROWS);
-            const key = `${x}-${y}`;
+            const centerRect = centerRef.current?.getBoundingClientRect() || {
+                top: height / 3,
+                left: width / 3,
+                right: (width * 2) / 3,
+                bottom: (height * 2) / 3,
+            };
 
-            if (usedCells.has(key) || isInCenter(x, y)) continue;
-
-            usedCells.add(key);
-            positions.push({
-                left: x * cellWidth + cellWidth / 2 - imgSize / 2,
-                top: y * cellHeight + cellHeight / 2 - imgSize / 2,
+            const newPositions = imgData.slice(0, imageCount).map(() => {
+                const pos = getRandomPosition(used, size, width, height, centerRect);
+                used.push(pos);
+                return pos;
             });
-        }
 
-        setPositions(positions);
+            setPositions(newPositions);
+        };
+
+        handleResize(); // Initial call
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     return (
-        <div id="hero" className="relative h-screen overflow-hidden flex items-center justify-center">
-            <motion.div
+        <div
+            id="hero"
+            className="relative h-screen overflow-hidden flex items-center justify-center px-4 sm:px-8"
+        >
+            <div
                 ref={centerRef}
-                className="flex flex-col gap-4 text-center items-center z-50 px-4"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+                className="flex flex-col gap-4 text-center items-center z-30"
             >
-                <motion.h1
-                    className="text-4xl md:text-5xl xl:text-6xl font-medium uppercase"
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
-                >
-                    Wanna Break From The Ads <br /> And Enjoy The Music
-                </motion.h1>
-                <motion.p
-                    className="md:w-3/4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.6 }}
-                >
+                <h1 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-medium uppercase 2xl:leading-18">
+                    Wanna Break From The Ads <br className="hidden sm:block" /> And Enjoy The Music
+                </h1>
+                <p className="w-full sm:w-3/4 text-xs sm:text-base 2xl:text-lg">
                     Explore a world of music without the distractions of ads. Discover a new way to immerse yourself in your favorite tunes.
-                </motion.p>
-            </motion.div>
+                </p>
+            </div>
 
             {positions.length > 0 &&
-                imgData.map((img, i) => (
+                imgData.slice(0, numImages).map((img, i) => (
                     <motion.div
                         key={i}
                         className="absolute"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.8 + i * 0.1 }}
+                        transition={{ delay: i * 0.1 }}
                         style={{
                             top: positions[i].top,
                             left: positions[i].left,
-                            width: 100,
-                            height: 100,
+                            width: imgSize,
+                            height: imgSize,
                         }}
                     >
                         <Image
                             src={img}
                             alt={`Hero image ${i}`}
-                            width={150}
-                            height={150}
-                            className="object-cover hover:scale-105 transition-all duration-200 ease-in-out"
+                            width={imgSize}
+                            height={imgSize}
+                            className="rounded object-cover transition duration-300 ease-in-out transform hover:scale-105"
                         />
                     </motion.div>
                 ))}
