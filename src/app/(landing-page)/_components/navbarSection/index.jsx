@@ -61,7 +61,7 @@ export default function Navbar() {
         <nav
             className={`fixed top-0 left-0 w-full px-4 md:px-6 lg:px-8 py-4 z-50 transition-all duration-300 flex items-center justify-between
             ${isHidden && !isOpen ? '-translate-y-full' : 'translate-y-0'}
-            ${hasScrolled || isOpen ? 'bg-white' : 'bg-transparent'}
+            ${hasScrolled || isOpen ? 'bg-[var(--background)] shadow-lg' : 'bg-transparent'}
              `}
         >
             <Link href="/">
