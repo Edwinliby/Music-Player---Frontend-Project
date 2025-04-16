@@ -26,7 +26,7 @@ function LayoutContent({ children }) {
   }, []);
 
   return (
-    <div className="relative w-full h-screen flex justify-end bg-[url(/bg.webp)] bg-cover bg-center bg-no-repeat">
+    <div className="relative w-full h-[calc(100vh-.5rem)] md:h-screen flex justify-end bg-[url(/bg.webp)] bg-cover bg-center bg-no-repeat">
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <Profile isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div

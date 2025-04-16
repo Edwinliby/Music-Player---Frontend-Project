@@ -2,6 +2,7 @@ import AboutSection from "./_components/aboutSection";
 import FooterSection from "./_components/footerSection";
 import HeroSection from "./_components/heroSection";
 import Navbar from "./_components/navbarSection";
+import JoinSection from "./_components/joinSection";
 
 export default function page() {
     return (
@@ -9,6 +10,7 @@ export default function page() {
             <Navbar />
             <HeroSection />
             <AboutSection />
+            <JoinSection />
             <FooterSection />
         </>
     )

@@ -44,7 +44,7 @@ export default function Profile({ isOpen, setIsOpen }) {
                 )}
 
                 {isMenu && (
-                    <div className="absolute right-1.5 md:left-0 top-13 md:bottom-14 w-40 bg-white rounded shadow-lg z-10">
+                    <div className="absolute right-0 top-14 bottom-auto md:top-auto md:left-0 md:bottom-14 w-40 bg-white rounded shadow-lg z-10">
                         <div className="py-1">
                             <a href="#" className="flex justify-between items-center px-4 py-3 hover:bg-gray-200">
                                 Account

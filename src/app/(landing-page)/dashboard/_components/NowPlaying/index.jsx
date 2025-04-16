@@ -175,8 +175,10 @@ export default function NowPlaying({ song, isPlaying }) {
                                             <div className="flex flex-col gap-1">
                                                 <b className="text-xs xl:text-sm font-medium">{item.title}</b>
                                                 {
-                                                    item.featuring && (
+                                                    item.featuring ? (
                                                         <p className="text-[.7rem] xl:text-xs text-gray-500 pb-1">feat. {item.featuring}</p>
+                                                    ) : (
+                                                        <p className="text-[.7rem] xl:text-xs text-gray-500 pb-1">feat. {song.author}</p>
                                                     )
                                                 }
                                             </div>
