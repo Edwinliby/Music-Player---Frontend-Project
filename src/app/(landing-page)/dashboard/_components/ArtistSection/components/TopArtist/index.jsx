@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Artist({ data }) {
     const scrollRef = useRef(null)
@@ -110,18 +111,20 @@ export default function Artist({ data }) {
                                 if (!isTouchDevice) setHoveredCard(null)
                             }}
                         >
-                            <div className='relative rounded-lg overflow-hidden mb-1'>
-                                <img
-                                    src={item.artistImg}
-                                    alt={item.title}
-                                    className='w-40 h-40 object-cover rounded-full'
-                                />
-                                {(!isTouchDevice && hoveredCard === index) || isTouchDevice ? (
-                                    <Play className='fill-black text-black absolute bottom-1 right-1 bg-green-500 rounded-full p-2 w-11 h-11 transition-opacity duration-300' />
-                                ) : null}
-                            </div>
-                            <b className='text-sm font-semibold text-gray-500'>{item.author}</b>
-                            <p className='text-xs font-medium'>Artist</p>
+                            <Link href={item.link}>
+                                <div className='relative rounded-lg overflow-hidden mb-1'>
+                                    <img
+                                        src={item.artistImg}
+                                        alt={item.title}
+                                        className='w-40 h-40 object-cover rounded-full'
+                                    />
+                                    {(!isTouchDevice && hoveredCard === index) || isTouchDevice ? (
+                                        <Play className='fill-black text-black absolute bottom-1 right-1 bg-green-500 rounded-full p-2 w-11 h-11 transition-opacity duration-300' />
+                                    ) : null}
+                                </div>
+                                <b className='text-sm font-semibold text-gray-500'>{item.author}</b>
+                                <p className='text-xs font-medium'>Artist</p>
+                            </Link>
                         </motion.div>
                     ))}
                 </div>
