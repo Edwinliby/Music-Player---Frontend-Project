@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
 import NowPlaying from '../../_components/NowPlaying';
@@ -9,22 +10,20 @@ import { motion } from 'framer-motion';
 
 export default function PodcastPage() {
     const searchParams = useSearchParams();
+    const [isFollowing, setIsFollowing] = useState(false)
+
+    const FollowToggle = () => {
+        setIsFollowing((prev) => !prev)
+    }
 
     const author = searchParams.get('author');
     const title = searchParams.get('title');
     const authorImg = searchParams.get('authorImg');
-    const coverImg = searchParams.get('coverImg');
-    const hear = searchParams.get('hear');
-    const location = searchParams.get('location');
     const about = searchParams.get('about');
-    const genre = searchParams.get('genre');
 
     const {
-        songs,
-        currentIndex,
         currentSong,
         isPlaying,
-        setCurrentIndex,
         handleTogglePlay,
     } = useMusicPlayer();
 
@@ -55,8 +54,17 @@ export default function PodcastPage() {
                     <div className='w-full h-full relative flex flex-col gap-6 md:gap-8 p-4 md:p-6'>
                         <div className='absolute left-0 top-0 w-full h-1/2 bg-gradient-to-b from-black/5 to-transparent' />
 
-                        <div className='flex items-center gap-6'>
-                            <button className='border cursor-pointer rounded-4xl px-6 py-1.5'>Follow</button> <Ellipsis />
+                        <div className='flex items-center gap-6 z-10'>
+                            <button
+                                onClick={FollowToggle}
+                                className={`border cursor-pointer px-6 py-1.5 rounded-full transition duration-200 ${isFollowing
+                                    ? 'bg-green-500 border-green-500 text-white hover:bg-green-400'
+                                    : 'border-gray-400 bg-gray-200 hover:bg-gray-100'
+                                    }`}
+                            >
+                                {isFollowing ? 'Following' : 'Follow'}
+                            </button>
+                            <Ellipsis />
                         </div>
 
                         <div className='flex flex-col gap-3'>

@@ -6,13 +6,17 @@ import { CirclePlus, Check, AudioLines } from 'lucide-react'
 import Image from 'next/image'
 import Box from '@/../public/box.webp'
 import Tool from '@/../public/tool.webp'
-import Disk from '@/../public/disk.webp'
 
 export default function NowPlaying({ song, isPlaying }) {
     const [liked, setLiked] = useState(false);
+    const [isFollowing, setIsFollowing] = useState(false)
     const rotate = useMotionValue(0);
     const animationRef = useRef(null);
     const lastTimeRef = useRef(null);
+
+    const FollowToggle = () => {
+        setIsFollowing((prev) => !prev)
+    }
 
     const spin = (time) => {
         if (lastTimeRef.current != null) {
@@ -80,13 +84,22 @@ export default function NowPlaying({ song, isPlaying }) {
                         style={{ transformOrigin: 'calc(100% - 2rem) 3rem' }}
                     />
 
-                    <motion.img
-                        src={Disk.src}
-                        draggable={false}
-                        alt='disk'
-                        style={{ rotate }}
-                        className='h-fit absolute top-8 left-8 lg:top-6 lg:left-6.5 xl:top-8 xl:left-8 2xl:top-9 2xl:left-9 lg:w-[calc(100%-38%)] xl:w-[calc(100%-35%)]'
-                    />
+                    <div className='absolute top-8 left-8 lg:top-6 lg:left-6.5 xl:top-8 xl:left-8 2xl:top-9 2xl:left-9
+                    h-[calc(100%-21%)] w-[calc(100%-35%)] rounded-full overflow-hidden border-2 border-gray-300
+                    '>
+                        <div className='absolute top-0 left-0 z-10 bg-black/30 w-full h-full'>
+                            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rounded-full bg-gray-200 w-14 h-14 border-8 border-gray-700'>
+                                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 rounded-full bg-gray-400 w-2 h-2' />
+                            </div>
+                        </div>
+                        <motion.img
+                            src={song.coverImg}
+                            draggable={false}
+                            alt='disk'
+                            style={{ rotate }}
+                            className='w-full h-full object-cover'
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -102,17 +115,16 @@ export default function NowPlaying({ song, isPlaying }) {
                     transition={{ delay: 0.3, duration: 0.4 }}
                 >
                     <Image
-                        src={song.coverImg}
+                        src={song.artistImg}
                         alt={song.title}
-                        width={100}
-                        height={100}
-                        className="w-full h-32 xl:h-50 object-bottom object-cover bg-gray-300"
+                        width={500}
+                        height={500}
+                        className="w-full fit object-bottom object-cover bg-gray-300"
                     />
-                    <div className="absolute top-0 left-0 z-10 bg-[#fff]/65 w-full h-full" />
                     <div className='z-20 absolute bottom-0 right-0 px-2 xl:px-4 py-1 xl:py-2 w-full h-fit flex items-center justify-between'>
                         <span>
-                            <b className="font-semibold text-lg">{song.title}</b>
-                            <p className="text-xs md:text-xs font-semibold text-gray-700 pb-1">{song.author}</p>
+                            {/* <b className="font-semibold text-lg">{song.title}</b> */}
+                            {/* <p className="text-xs md:text-xs font-semibold text-gray-700 pb-1">{song.author}</p> */}
                         </span>
                         <motion.button
                             whileTap={{ scale: 0.8 }}
@@ -145,9 +157,20 @@ export default function NowPlaying({ song, isPlaying }) {
                         variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
                         className='px-2 xl:px-4 flex flex-col gap-1 font-medium'
                     >
-                        <b>About the Artist</b>
+                        <div className='flex items-center justify-between gap-2'>
+                            <b>About the Artist</b>
+                            <button
+                                onClick={FollowToggle}
+                                className={`text-xs px-4 py-1.5 rounded-full transition duration-200 ${isFollowing
+                                    ? 'bg-green-500 text-white hover:bg-green-400'
+                                    : 'bg-gray-600 text-white hover:bg-gray-500'
+                                    }`}
+                            >
+                                {isFollowing ? 'Following' : 'Follow'}
+                            </button>
+                        </div>
                         <p className='text-md pt-2'>{song.hear}</p>
-                        <p className='text-sm text-gray-600'>{song.location}</p>
+                        <p className='text-sm text-gray-600'>Place - {song.location}</p>
                     </motion.div>
 
                     {song.subSongs?.length > 0 && (<hr className='border-gray-300' />)}

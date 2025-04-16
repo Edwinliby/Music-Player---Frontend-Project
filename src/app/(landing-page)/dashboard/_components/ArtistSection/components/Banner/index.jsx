@@ -19,7 +19,7 @@ export default function Banner() {
     const item = data[currentIndex]
 
     return (
-        <div className='relative h-fit xl:h-[20rem] md:mr-4 pt-2 overflow-hidden'>
+        <div className='relative h-fit xl:h-[20rem] 2xl:h-[25rem] md:mr-4 pt-2 overflow-hidden'>
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentIndex}
@@ -27,7 +27,7 @@ export default function Banner() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.6, ease: 'easeInOut' }}
-                    className="h-fit w-full rounded-4xl"
+                    className="h-full w-full rounded-4xl"
                     style={{
                         backgroundImage: `url(${item.bg})`,
                         backgroundSize: 'cover',
@@ -35,7 +35,7 @@ export default function Banner() {
                     }}
                 >
                     <div className='relative z-20 flex flex-col lg:flex-row items-end justify-between gap-4 h-full text-center rounded-4xl bg-black/20 overflow-hidden lg:overflow-visible'>
-                        <div className='flex flex-col h-full w-full lg:w-fit p-4 pt-6 xl:mb-8 md:pl-6 gap-4 text-left text-white'>
+                        <div className='flex flex-col justify-center h-full w-full lg:w-fit p-4 pt-6 md:pt-0 md:pl-8 gap-4 text-left text-white'>
                             <p className='uppercase text-sm'>Curated Playlist</p>
                             <h2 className='text-5xl lg:text-3xl xl:text-4xl 2xl:text-5xl uppercase font-extrabold pt-2'>{item.title}</h2>
                             <p className='2xl:text-lg pb-2'>Enjoy the music with your loved ones and friends</p>

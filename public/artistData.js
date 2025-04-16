@@ -12,6 +12,7 @@ export const data = [
     hear: "1,634,754 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/1.webp",
         coverImg:
           "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=400&fit=crop&auto=format",
         title: "Happier",
@@ -24,6 +25,7 @@ export const data = [
         featuring: "Bastille",
       },
       {
+        artistImg: "/artist/1.webp",
         coverImg:
           "https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=400&fit=crop&auto=format",
         title: "Silence",
@@ -36,6 +38,7 @@ export const data = [
         featuring: "Khalid",
       },
       {
+        artistImg: "/artist/1.webp",
         coverImg:
           "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=400&fit=crop&auto=format",
         title: "Friends",
@@ -48,6 +51,7 @@ export const data = [
         featuring: "Anne-Marie",
       },
       {
+        artistImg: "/artist/1.webp",
         coverImg:
           "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=400&fit=crop&auto=format",
         title: "Wolves",
@@ -60,6 +64,7 @@ export const data = [
         featuring: "Selena Gomez",
       },
       {
+        artistImg: "/artist/1.webp",
         coverImg:
           "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&fit=crop&auto=format",
         title: "Keep It Mello",
@@ -72,6 +77,7 @@ export const data = [
         featuring: "Omar LinX",
       },
       {
+        artistImg: "/artist/1.webp",
         coverImg:
           "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?q=80&w=400&fit=crop&auto=format",
         title: "Blocks",
@@ -97,6 +103,7 @@ export const data = [
     hear: "2,987,213 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/2.webp",
         coverImg:
           "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&fit=crop&auto=format",
         title: "Firestone",
@@ -109,6 +116,7 @@ export const data = [
         featuring: "Conrad Sewell",
       },
       {
+        artistImg: "/artist/2.webp",
         coverImg:
           "https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=400&fit=crop&auto=format",
         title: "Stole the Show",
@@ -121,6 +129,7 @@ export const data = [
         featuring: "Parson James",
       },
       {
+        artistImg: "/artist/2.webp",
         coverImg:
           "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?q=80&w=400&fit=crop&auto=format",
         title: "It Ain't Me",
@@ -133,6 +142,7 @@ export const data = [
         featuring: "Selena Gomez",
       },
       {
+        artistImg: "/artist/2.webp",
         coverImg:
           "https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=400&fit=crop&auto=format",
         title: "Stay",
@@ -145,6 +155,7 @@ export const data = [
         featuring: "Maty Noyes",
       },
       {
+        artistImg: "/artist/2.webp",
         coverImg:
           "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?q=80&w=400&fit=crop&auto=format",
         title: "Born to Be Yours",
@@ -157,6 +168,7 @@ export const data = [
         featuring: "Imagine Dragons",
       },
       {
+        artistImg: "/artist/2.webp",
         coverImg:
           "https://images.unsplash.com/photo-1534982841079-afde227ada8f?q=80&w=400&fit=crop&auto=format",
         title: "Remind Me to Forget",
@@ -183,6 +195,7 @@ export const data = [
     hear: "3,243,102 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/3.webp",
         coverImg:
           "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=400&fit=crop&auto=format",
         title: "Blinding Lights",
@@ -194,6 +207,7 @@ export const data = [
         timestamp: "3:22",
       },
       {
+        artistImg: "/artist/3.webp",
         coverImg:
           "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=400&fit=crop&auto=format",
         title: "Save Your Tears",
@@ -205,6 +219,7 @@ export const data = [
         timestamp: "3:35",
       },
       {
+        artistImg: "/artist/3.webp",
         coverImg:
           "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=400&fit=crop&auto=format",
         title: "The Hills",
@@ -216,6 +231,7 @@ export const data = [
         timestamp: "4:02",
       },
       {
+        artistImg: "/artist/3.webp",
         coverImg:
           "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?q=80&w=400&fit=crop&auto=format",
         title: "Can't Feel My Face",
@@ -227,6 +243,7 @@ export const data = [
         timestamp: "3:35",
       },
       {
+        artistImg: "/artist/3.webp",
         coverImg:
           "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&fit=crop&auto=format",
         title: "In the Night",
@@ -238,6 +255,7 @@ export const data = [
         timestamp: "3:55",
       },
       {
+        artistImg: "/artist/3.webp",
         coverImg:
           "https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=400&fit=crop&auto=format",
         title: "After Hours",
@@ -263,6 +281,7 @@ export const data = [
     hear: "4,786,012 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/4.webp",
         coverImg:
           "https://images.unsplash.com/photo-1453738773917-9c3eff1db985?q=80&w=400&fit=crop&auto=format",
         title: "Wake Me Up",
@@ -274,6 +293,7 @@ export const data = [
         timestamp: "4:09",
       },
       {
+        artistImg: "/artist/4.webp",
         coverImg:
           "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=400&fit=crop&auto=format",
         title: "Levels",
@@ -285,6 +305,7 @@ export const data = [
         timestamp: "5:39",
       },
       {
+        artistImg: "/artist/4.webp",
         coverImg:
           "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=400&fit=crop&auto=format",
         title: "Hey Brother",
@@ -296,6 +317,7 @@ export const data = [
         timestamp: "4:15",
       },
       {
+        artistImg: "/artist/4.webp",
         coverImg:
           "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&fit=crop&auto=format",
         title: "Waiting For Love",
@@ -307,6 +329,7 @@ export const data = [
         timestamp: "3:50",
       },
       {
+        artistImg: "/artist/4.webp",
         coverImg:
           "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?q=80&w=400&fit=crop&auto=format",
         title: "Without You",
@@ -319,6 +342,7 @@ export const data = [
         featuring: "Sandro Cavazza",
       },
       {
+        artistImg: "/artist/4.webp",
         coverImg:
           "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=400&fit=crop&auto=format",
         title: "Broken Arrows",
@@ -344,6 +368,7 @@ export const data = [
     hear: "5,429,315 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/5.webp",
         coverImg:
           "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=400&fit=crop&auto=format",
         title: "Moonlight",
@@ -355,6 +380,7 @@ export const data = [
         timestamp: "2:15",
       },
       {
+        artistImg: "/artist/5.webp",
         coverImg:
           "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=400&fit=crop&auto=format",
         title: "Sad!",
@@ -366,6 +392,7 @@ export const data = [
         timestamp: "2:46",
       },
       {
+        artistImg: "/artist/5.webp",
         coverImg:
           "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&fit=crop&auto=format",
         title: "Jocelyn Flores",
@@ -377,6 +404,7 @@ export const data = [
         timestamp: "1:59",
       },
       {
+        artistImg: "/artist/5.webp",
         coverImg:
           "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=400&fit=crop&auto=format",
         title: "Changes",
@@ -388,6 +416,7 @@ export const data = [
         timestamp: "2:02",
       },
       {
+        artistImg: "/artist/5.webp",
         coverImg:
           "https://images.unsplash.com/photo-1534982841079-afde227ada8f?q=80&w=400&fit=crop&auto=format",
         title: "Look At Me!",
@@ -399,6 +428,7 @@ export const data = [
         timestamp: "2:07",
       },
       {
+        artistImg: "/artist/5.webp",
         coverImg:
           "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=400&fit=crop&auto=format",
         title: "Revenge",
@@ -424,6 +454,7 @@ export const data = [
     hear: "3,987,621 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/6.webp",
         coverImg:
           "https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=400&fit=crop&auto=format",
         title: "Gooey",
@@ -435,6 +466,7 @@ export const data = [
         timestamp: "4:49",
       },
       {
+        artistImg: "/artist/6.webp",
         coverImg:
           "https://images.unsplash.com/photo-1453738773917-9c3eff1db985?q=80&w=400&fit=crop&auto=format",
         title: "Youth",
@@ -446,6 +478,7 @@ export const data = [
         timestamp: "3:50",
       },
       {
+        artistImg: "/artist/6.webp",
         coverImg:
           "https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=400&fit=crop&auto=format",
         title: "Your Love (Déjà Vu)",
@@ -457,6 +490,7 @@ export const data = [
         timestamp: "3:54",
       },
       {
+        artistImg: "/artist/6.webp",
         coverImg:
           "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&fit=crop&auto=format",
         title: "Tangerine",
@@ -468,6 +502,7 @@ export const data = [
         timestamp: "3:24",
       },
       {
+        artistImg: "/artist/6.webp",
         coverImg:
           "https://images.unsplash.com/photo-1534982841079-afde227ada8f?q=80&w=400&fit=crop&auto=format",
         title: "Pork Soda",
@@ -479,6 +514,7 @@ export const data = [
         timestamp: "4:12",
       },
       {
+        artistImg: "/artist/6.webp",
         coverImg:
           "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?q=80&w=400&fit=crop&auto=format",
         title: "Tokyo Drifting",
@@ -505,6 +541,7 @@ export const data = [
     hear: "6,892,154 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/7.webp",
         coverImg:
           "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=400&fit=crop&auto=format",
         title: "Lose Yourself",
@@ -516,6 +553,7 @@ export const data = [
         timestamp: "5:26",
       },
       {
+        artistImg: "/artist/7.webp",
         coverImg:
           "https://images.unsplash.com/photo-1453738773917-9c3eff1db985?q=80&w=400&fit=crop&auto=format",
         title: "Not Afraid",
@@ -527,6 +565,7 @@ export const data = [
         timestamp: "4:08",
       },
       {
+        artistImg: "/artist/7.webp",
         coverImg:
           "https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=400&fit=crop&auto=format",
         title: "The Real Slim Shady",
@@ -538,6 +577,7 @@ export const data = [
         timestamp: "4:44",
       },
       {
+        artistImg: "/artist/7.webp",
         coverImg:
           "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&fit=crop&auto=format",
         title: "Love The Way You Lie",
@@ -550,6 +590,7 @@ export const data = [
         featuring: "Rihanna",
       },
       {
+        artistImg: "/artist/7.webp",
         coverImg:
           "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?q=80&w=400&fit=crop&auto=format",
         title: "Without Me",
@@ -561,6 +602,7 @@ export const data = [
         timestamp: "4:50",
       },
       {
+        artistImg: "/artist/7.webp",
         coverImg:
           "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=400&fit=crop&auto=format",
         title: "Godzilla",
@@ -587,6 +629,7 @@ export const data = [
     hear: "3,876,210 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/8.webp",
         coverImg:
           "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=400&fit=crop&auto=format",
         title: "Golden Hour",
@@ -598,6 +641,7 @@ export const data = [
         timestamp: "3:29",
       },
       {
+        artistImg: "/artist/8.webp",
         coverImg:
           "https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=400&fit=crop&auto=format",
         title: "heartbreak feels like",
@@ -609,6 +653,7 @@ export const data = [
         timestamp: "2:52",
       },
       {
+        artistImg: "/artist/8.webp",
         coverImg:
           "https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=400&fit=crop&auto=format",
         title: "i can't help it",
@@ -620,6 +665,7 @@ export const data = [
         timestamp: "3:14",
       },
       {
+        artistImg: "/artist/8.webp",
         coverImg:
           "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=400&fit=crop&auto=format",
         title: "sadness feels like",
@@ -631,6 +677,7 @@ export const data = [
         timestamp: "2:48",
       },
       {
+        artistImg: "/artist/8.webp",
         coverImg:
           "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=400&fit=crop&auto=format",
         title: "space feels like",
@@ -642,6 +689,7 @@ export const data = [
         timestamp: "3:06",
       },
       {
+        artistImg: "/artist/8.webp",
         coverImg:
           "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&fit=crop&auto=format",
         title: "moon and back",
@@ -667,6 +715,7 @@ export const data = [
     hear: "5,421,378 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/9.webp",
         coverImg:
           "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=400&fit=crop&auto=format",
         title: "Apologize",
@@ -678,6 +727,7 @@ export const data = [
         timestamp: "3:28",
       },
       {
+        artistImg: "/artist/9.webp",
         coverImg:
           "https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=400&fit=crop&auto=format",
         title: "Secrets",
@@ -689,6 +739,7 @@ export const data = [
         timestamp: "3:44",
       },
       {
+        artistImg: "/artist/9.webp",
         coverImg:
           "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?q=80&w=400&fit=crop&auto=format",
         title: "Good Life",
@@ -700,6 +751,7 @@ export const data = [
         timestamp: "4:13",
       },
       {
+        artistImg: "/artist/9.webp",
         coverImg:
           "https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=400&fit=crop&auto=format",
         title: "If I Lose Myself",
@@ -711,6 +763,7 @@ export const data = [
         timestamp: "4:01",
       },
       {
+        artistImg: "/artist/9.webp",
         coverImg:
           "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=400&fit=crop&auto=format",
         title: "I Ain't Worried",
@@ -722,6 +775,7 @@ export const data = [
         timestamp: "2:28",
       },
       {
+        artistImg: "/artist/9.webp",
         coverImg:
           "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?q=80&w=400&fit=crop&auto=format",
         title: "Rescue Me",
@@ -749,6 +803,7 @@ export const data = [
     hear: "4,942,190 monthly listeners",
     subSongs: [
       {
+        artistImg: "/artist/10.webp",
         coverImg:
           "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=400&fit=crop&auto=format",
         title: "Don't Let Me Down",
@@ -761,6 +816,7 @@ export const data = [
         featuring: "Daya",
       },
       {
+        artistImg: "/artist/10.webp",
         coverImg:
           "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=400&fit=crop&auto=format",
         title: "Paris",
@@ -772,6 +828,7 @@ export const data = [
         timestamp: "3:41",
       },
       {
+        artistImg: "/artist/10.webp",
         coverImg:
           "https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=400&fit=crop&auto=format",
         title: "Something Just Like This",
@@ -784,6 +841,7 @@ export const data = [
         featuring: "Coldplay",
       },
       {
+        artistImg: "/artist/10.webp",
         coverImg:
           "https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=400&fit=crop&auto=format",
         title: "Roses",
@@ -795,6 +853,7 @@ export const data = [
         timestamp: "3:46",
       },
       {
+        artistImg: "/artist/10.webp",
         coverImg:
           "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&fit=crop&auto=format",
         title: "Sick Boy",
@@ -806,6 +865,7 @@ export const data = [
         timestamp: "3:13",
       },
       {
+        artistImg: "/artist/10.webp",
         coverImg:
           "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=400&fit=crop&auto=format",
         title: "Call You Mine",

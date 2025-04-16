@@ -111,7 +111,7 @@ export default function HeroSection() {
                     href='/login'
                     className="text-lg xl:text-2xl font-semibold bg-[var(--red)] border border-[var(--red)] hover:bg-white hover:text-[var(--red)] rounded-4xl px-4 md:px-6 py-2 md:py-3 text-white transition duration-200 ease-in-out md:shadow-[3px_6px_0px_rgba(0,0,0,0.25)] hover:translate-x-[3px] hover:translate-y-[6px] hover:shadow-[0px_0px_0px_rgba(0,0,0,0.25)]"
                 >
-                    Join Now
+                    Tune in Now !
                 </Link>
             </div>
 
