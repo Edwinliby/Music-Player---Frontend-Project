@@ -23,43 +23,49 @@ export default function Profile({ isOpen, setIsOpen }) {
     }, [])
 
     return (
-        <div className='z-50 absolute right-2 md:bottom-4 md:left-4 hidden md:flex items-center gap-4 w-fit' ref={dropdownRef}>
-            <motion.div
-                whileTap={{ scale: 0.9 }}
-                whileHover={{ scale: 1.1 }}
-                className='w-12 h-12 rounded-full bg-white/10 flex justify-center items-center cursor-pointer'
-                onClick={() => setIsMenu(!isMenu)}
-            >
-                <img src="/bg.webp" alt="profile-pic" className='rounded-full w-9 h-9 object-cover' />
-            </motion.div>
-            {isOpen && (
-                <motion.div whileTap={{ scale: 0.9 }} whileHover={{ scale: 1.1 }}>
-                    <Bell className='text-white hidden md:block hover:opacity-80' size={18} />
+        <div className='z-50 absolute right-2 md:bottom-4 md:left-4 w-fit h-fit' ref={dropdownRef}>
+            <div className='relative flex items-center gap-4'>
+                <motion.div
+                    whileTap={{ scale: 0.9 }}
+                    whileHover={{ scale: 1.1 }}
+                    className='w-12 h-12 rounded-full bg-white/10 flex justify-center items-center cursor-pointer'
+                    onClick={() => setIsMenu(!isMenu)}
+                >
+                    <img src="/form.jpg" draggable={false} alt="profile-pic" className='rounded-full w-9 h-9 object-cover' />
                 </motion.div>
-            )}
+                {isOpen && (
+                    <motion.div
+                        whileTap={{ scale: 0.9 }}
+                        whileHover={{ scale: 1.1 }}
+                        className="hidden md:block"
+                    >
+                        <Bell className="text-white hover:opacity-80" size={18} />
+                    </motion.div>
+                )}
 
-            {isMenu && (
-                <div className="absolute left-0 bottom-14 w-40 bg-white rounded shadow-lg z-10">
-                    <div className="py-1">
-                        <a href="#" className="flex justify-between items-center px-4 py-3 hover:bg-gray-200">
-                            Account
-                            <ExternalLink size={16} />
-                        </a>
-                        <div className="border-t border-gray-700 my-1"></div>
-                        <a href="#" className="flex justify-between items-center px-4 py-3 hover:bg-gray-200">
-                            Support
-                            <ExternalLink size={16} />
-                        </a>
-                        <a href="/dashboard/settings" className="block px-4 py-3 hover:bg-gray-200">
-                            Settings
-                        </a>
-                        <div className="border-t border-gray-700 my-1"></div>
-                        <a href="/" className="block px-4 py-3 hover:bg-gray-200">
-                            Log out
-                        </a>
+                {isMenu && (
+                    <div className="absolute right-1.5 md:left-0 top-13 md:bottom-14 w-40 bg-white rounded shadow-lg z-10">
+                        <div className="py-1">
+                            <a href="#" className="flex justify-between items-center px-4 py-3 hover:bg-gray-200">
+                                Account
+                                <ExternalLink size={16} />
+                            </a>
+                            <div className="border-t border-gray-700 my-1"></div>
+                            <a href="#" className="flex justify-between items-center px-4 py-3 hover:bg-gray-200">
+                                Support
+                                <ExternalLink size={16} />
+                            </a>
+                            <a href="/dashboard/settings" className="block px-4 py-3 hover:bg-gray-200">
+                                Settings
+                            </a>
+                            <div className="border-t border-gray-700 my-1"></div>
+                            <a href="/" className="block px-4 py-3 hover:bg-gray-200">
+                                Log out
+                            </a>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     )
 }
