@@ -1,10 +1,15 @@
+import AboutSection from "./_components/aboutSection";
+import FooterSection from "./_components/footerSection";
+import HeroSection from "./_components/heroSection";
+import Navbar from "./_components/navbarSection";
 
 export default function page() {
     return (
-        <div className="w-full h-full">
-            landing page <br />
-            <a href="/dashboard" className="underline text-red-600">Dashboard</a><br />
-            updating the whole code before  April 16th 11:59 PM PT
-        </div>
+        <>
+            <Navbar />
+            <HeroSection />
+            <AboutSection />
+            <FooterSection />
+        </>
     )
 }
