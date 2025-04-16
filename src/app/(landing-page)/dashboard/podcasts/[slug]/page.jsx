@@ -47,7 +47,7 @@ export default function PodcastPage() {
                         />
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm'>Public Playlist</p>
-                            <h1 className='font-bold text-5xl xl:text-6xl'>This Is {author}</h1>
+                            <h1 className='font-extrabold text-5xl xl:text-6xl'>This Is {author}</h1>
                             <p className='text-xl font-semibold'>{author}</p>
                         </div>
                     </motion.div>

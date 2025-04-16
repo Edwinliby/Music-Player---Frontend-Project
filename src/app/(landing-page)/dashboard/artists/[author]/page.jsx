@@ -42,7 +42,7 @@ export default function ArtistPage() {
                         <div className='absolute bottom-0 left-0 w-full h-full bg-black/50' />
                         <div className='absolute bottom-8 inset-x-4 md:inset-x-8 text-white font-semibold'>
                             <p>Public Playlist</p>
-                            <h1 className='font-bold text-5xl xl:text-[5rem] md:leading-14 xl:leading-26 py-2 xl:py-0'>This Is {author}</h1>
+                            <h1 className='font-extrabold text-5xl xl:text-[5rem] md:leading-14 xl:leading-26 py-2 xl:py-0'>This Is {author}</h1>
                             <p className='text-sm text-white/70'>The essential tracks from {author}.</p>
                             <div className='flex items-center flex-wrap gap-2 mt-2'>
                                 <Image
