@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
 import NowPlaying from '../../_components/NowPlaying';
-import SearchBar from '@/app/components/searchBar';
+import SearchBar from '@/app/components/SearchBar';
 import { Ellipsis, Star, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 

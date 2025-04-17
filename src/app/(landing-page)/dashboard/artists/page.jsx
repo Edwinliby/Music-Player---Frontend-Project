@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { data } from '@/../public/artistData'
-import SearchBar from "@/app/components/searchBar"
+import SearchBar from "@/app/components/SearchBar"
 import { FastAverageColor } from 'fast-average-color'
 import { motion } from 'framer-motion'
 import { Play } from 'lucide-react'

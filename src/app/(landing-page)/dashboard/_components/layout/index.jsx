@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Sidebar from "@/app/components/sidebar"
 import MusicBar from "@/app/components/musicBar"
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
-import Profile from "@/app/components/profile";
+import Profile from "@/app/components/Profile";
 
 function LayoutContent({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

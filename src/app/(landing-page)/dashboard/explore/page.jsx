@@ -2,7 +2,7 @@
 
 import { data } from '@/../public/artistData'
 import { data as pod } from '@/../public/podcastData'
-import SearchBar from "@/app/components/searchBar"
+import SearchBar from "@/app/components/SearchBar"
 import TopArtist from '../_components/ArtistSection/components/TopArtist'
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';

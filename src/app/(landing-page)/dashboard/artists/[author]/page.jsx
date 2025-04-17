@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import SearchBar from '@/app/components/searchBar'
+import SearchBar from '@/app/components/SearchBar'
 import { Play, Clock } from 'lucide-react'
 import { useMusicPlayer } from '@/context/MusicPlayerContext'
 import NowPlaying from '../../_components/NowPlaying';
