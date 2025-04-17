@@ -8,9 +8,7 @@ const MusicPlayerContext = createContext(null);
 export const MusicPlayerProvider = ({ children }) => {
     const [songs, setSongs] = useState(songData);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [shuffleMode, setShuffleMode] = useState(false);  // Shuffle Mode
-    const [loopMode, setLoopMode] = useState(false);  // Loop Mode
+    const [isPlaying, setIsPlaying] = useState(false); // Loop Mode
 
     const nextSong = (mode = 'normal') => {
         if (mode === 'shuffle') {

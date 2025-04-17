@@ -11,17 +11,19 @@ import {
     Repeat,
     Volume1,
     VolumeX,
+    Fullscreen
 } from 'lucide-react';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import { motion } from 'framer-motion';
+import FullPlayer from '../FullPlayer';
 
 export default function MusicBar({
     song,
     onNext,
     onPrev,
     isPlaying: isPlayingProp,
-    onTogglePlay,
+    onTogglePlay
 }) {
     const waveformRef = useRef(null);
     const wavesurferRef = useRef(null);
@@ -173,111 +175,138 @@ export default function MusicBar({
         setIsPlaying(isPlayingProp);
     }, [isPlayingProp]);
 
+
+    const [fullPlayer, setFullPlayer] = useState(false)
+
+    const toggleFullPlayer = () => {
+        setFullPlayer(!fullPlayer)
+    }
+
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="relative bottom-14 md:bottom-0 w-full px-4 py-3 md:px-6 md:py-4 bg-white shadow-[0_-10px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4 md:gap-0 z-50"
-        >
-            {/* Song Info */}
-            <div className="flex items-center gap-2 md:gap-4">
-                <Image
-                    src={song.coverImg}
-                    alt={song.title}
-                    width={100}
-                    height={100}
-                    className="w-12 h-12 md:w-14 md:h-14 object-cover rounded-md bg-gray-300"
+        <>
+            {/* {fullPlayer &&
+                <FullPlayer
+                    song={song}
+                    toggleFullPlayer={toggleFullPlayer}
+                    onNext={handleNext}
+                    onPrev={handlePrev}
+                    isPlayingProp={isPlaying}
+                    onTogglePlay={togglePlay}
                 />
-                <div className="flex flex-col">
-                    <b className="text-sm font-medium">{song.title}</b>
-                    <p className="text-[.7rem] md:text-xs text-gray-500 pb-1">{song.author}</p>
-                </div>
-            </div>
+            }
 
-            {/* Controls and Visualizer */}
-            <div className="flex items-center gap-8 w-fit xl:w-full xl:max-w-2xl mx-auto">
-                <div className="flex items-center gap-4">
-                    <SkipBack size={20} onClick={handlePrev} className="cursor-pointer" />
-                    <span
-                        onClick={togglePlay}
-                        className="flex items-center justify-center w-10 h-10 shadow-md rounded-full cursor-pointer bg-white"
-                    >
-                        {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-                    </span>
-                    <SkipForward size={20} onClick={handleNext} className="cursor-pointer" />
-                </div>
-                {/* Wave Surfer */}
-                <div className="hidden xl:flex items-center w-full">
-                    <span className="text-xs text-gray-600 min-w-[40px]">
-                        {formatTime(currentTime)}
-                    </span>
-                    <div ref={waveformRef} className="flex-1 h-fit cursor-pointer" />
-                    <span className="text-xs text-gray-600 min-w-[40px] text-right">
-                        {formatTime(duration)}
-                    </span>
-                </div>
-                {/* Mobile view progress bar */}
-                <div className="absolute bottom-0 left-0 w-full h-0.5 lg:hidden bg-gray-200">
-                    <div
-                        className="h-full bg-green-500 transition-all duration-200"
-                        style={{ width: `${(currentTime / duration) * 100 || 0}%` }}
-                    />
-                </div>
-            </div>
-
-            {/* Right Side: Shuffle, Like, Volume */}
-            <div className="flex items-center gap-4">
-                {/* Shuffle */}
-                <motion.button
-                    whileTap={{ scale: 0.8 }}
-                    whileHover={{ scale: 1.2 }}
-                    onClick={() => setShuffleMode(!shuffleMode)}
-                    className={`cursor-pointer ${shuffleMode ? 'text-green-500' : 'text-gray-400'}`}
-                >
-                    <Shuffle size={20} />
-                </motion.button>
-
-                {/* Loop */}
-                <motion.button
-                    whileTap={{ scale: 0.8 }}
-                    whileHover={{ scale: 1.2 }}
-                    onClick={() => setLoopMode(!loopMode)}
-                    className={`cursor-pointer hidden md:block ${loopMode ? 'text-green-500' : 'text-gray-400'}`}
-                >
-                    <Repeat size={20} />
-                </motion.button>
-
-                {/* Like */}
+            {!fullPlayer && ( */}
                 <motion.div
-                    whileTap={{ scale: 0.8 }}
-                    whileHover={{ scale: 1.2 }}
-                    onClick={toggleLike}
-                    className="cursor-pointer"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="relative bottom-14 md:bottom-0 w-full px-4 py-3 md:px-6 md:py-4 bg-white shadow-[0_-10px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4 md:gap-0 z-50"
                 >
-                    {liked ? (
-                        <Heart className="text-red-500 fill-red-500" size={20} />
-                    ) : (
-                        <Heart className="text-gray-400" size={20} />
-                    )}
-                </motion.div>
+                    {/* Song Info */}
+                    <div className="flex items-center gap-2 md:gap-4">
+                        <div className='relative w-12 h-12 md:w-14 md:h-14 rounded-md cursor-pointer overflow-hidden group'>
+                            <Image
+                                src={song.coverImg}
+                                alt={song.title}
+                                width={100}
+                                height={100}
+                                className="w-full h-full object-cover bg-gray-300"
+                            />
+                            <span className='w-full h-full absolute top-0 left-0 cursor-pointer flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:bg-black/40'>
+                                <Fullscreen className="text-white" />
+                            </span>
+                        </div>
+                        <div className="flex flex-col">
+                            <b className="text-sm font-medium">{song.title}</b>
+                            <p className="text-[.7rem] md:text-xs text-gray-500 pb-1">{song.author}</p>
+                        </div>
+                    </div>
 
-                {/* Volume */}
-                <div className="hidden md:flex items-center gap-2">
-                    <span onClick={toggleMute} className="cursor-pointer">
-                        {isMuted || volume === 0 ? <VolumeX size={20} /> : <Volume1 size={20} />}
-                    </span>
-                    <input
-                        type="range"
-                        min={0}
-                        max={1}
-                        step={0.01}
-                        value={volume}
-                        onChange={handleVolumeChange}
-                        className="custom-slider w-18 cursor-pointer"
-                    />
-                </div>
-            </div>
-        </motion.div>
+                    {/* Controls and Visualizer */}
+                    <div className="flex items-center gap-8 w-fit xl:w-full xl:max-w-2xl mx-auto">
+                        <div className="flex items-center gap-4">
+                            <SkipBack size={20} onClick={handlePrev} className="cursor-pointer" />
+                            <span
+                                onClick={togglePlay}
+                                className="flex items-center justify-center w-10 h-10 shadow-md rounded-full cursor-pointer bg-white"
+                            >
+                                {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+                            </span>
+                            <SkipForward size={20} onClick={handleNext} className="cursor-pointer" />
+                        </div>
+                        {/* Wave Surfer */}
+                        <div className="hidden xl:flex items-center w-full">
+                            <span className="text-xs text-gray-600 min-w-[40px]">
+                                {formatTime(currentTime)}
+                            </span>
+                            <div ref={waveformRef} className="flex-1 h-fit cursor-pointer" />
+                            <span className="text-xs text-gray-600 min-w-[40px] text-right">
+                                {formatTime(duration)}
+                            </span>
+                        </div>
+                        {/* Mobile view progress bar */}
+                        <div className="absolute bottom-0 left-0 w-full h-0.5 lg:hidden bg-gray-200">
+                            <div
+                                className="h-full bg-green-500 transition-all duration-200"
+                                style={{ width: `${(currentTime / duration) * 100 || 0}%` }}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Right Side: Shuffle, Like, Volume */}
+                    <div className="flex items-center gap-4">
+                        {/* Shuffle */}
+                        <motion.button
+                            whileTap={{ scale: 0.8 }}
+                            whileHover={{ scale: 1.2 }}
+                            onClick={() => setShuffleMode(!shuffleMode)}
+                            className={`cursor-pointer ${shuffleMode ? 'text-green-500' : 'text-gray-400'}`}
+                        >
+                            <Shuffle size={20} />
+                        </motion.button>
+
+                        {/* Loop */}
+                        <motion.button
+                            whileTap={{ scale: 0.8 }}
+                            whileHover={{ scale: 1.2 }}
+                            onClick={() => setLoopMode(!loopMode)}
+                            className={`cursor-pointer hidden md:block ${loopMode ? 'text-green-500' : 'text-gray-400'}`}
+                        >
+                            <Repeat size={20} />
+                        </motion.button>
+
+                        {/* Like */}
+                        <motion.div
+                            whileTap={{ scale: 0.8 }}
+                            whileHover={{ scale: 1.2 }}
+                            onClick={toggleLike}
+                            className="cursor-pointer"
+                        >
+                            {liked ? (
+                                <Heart className="text-red-500 fill-red-500" size={20} />
+                            ) : (
+                                <Heart className="text-gray-400" size={20} />
+                            )}
+                        </motion.div>
+
+                        {/* Volume */}
+                        <div className="hidden md:flex items-center gap-2">
+                            <span onClick={toggleMute} className="cursor-pointer">
+                                {isMuted || volume === 0 ? <VolumeX size={20} /> : <Volume1 size={20} />}
+                            </span>
+                            <input
+                                type="range"
+                                min={0}
+                                max={1}
+                                step={0.01}
+                                value={volume}
+                                onChange={handleVolumeChange}
+                                className="custom-slider w-18 cursor-pointer"
+                            />
+                        </div>
+                    </div>
+                </motion.div>
+            {/* )} */}
+        </>
     );
 }
