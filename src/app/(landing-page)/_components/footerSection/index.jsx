@@ -1,5 +1,5 @@
 import React from 'react';
-import { Twitter, Facebook, Youtube, Music, Headphones } from 'lucide-react';
+import { Twitter, Linkedin, Github, Headphones } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -85,13 +85,13 @@ const Footer = () => {
                             <p className="text-gray-400">Wave Player, 2025.</p>
                         </div>
                         <div className="flex space-x-4">
-                            <a href="#footer" className="bg-gray-800 p-2 rounded-full hover:bg-gray-600">
-                                <Youtube size={20} className="text-white/60 hover:text-[#BF301E]" />
+                            <a href="https://github.com/Edwinliby" target='_blank' className="bg-gray-800 p-2 rounded-full hover:bg-gray-600">
+                                <Github size={20} className="text-white/60 hover:text-[#BF301E]" />
                             </a>
-                            <a href="#footer" className="bg-gray-800 p-2 rounded-full hover:bg-gray-600">
-                                <Facebook size={20} className="text-white/60 hover:text-[#BF301E]" />
+                            <a href="https://www.linkedin.com/in/edwinliby/" target='_blank' className="bg-gray-800 p-2 rounded-full hover:bg-gray-600">
+                                <Linkedin size={20} className="text-white/60 hover:text-[#BF301E]" />
                             </a>
-                            <a href="#footer" className="bg-gray-800 p-2 rounded-full hover:bg-gray-600">
+                            <a href="https://x.com/EdwinLiby" target='_blank' className="bg-gray-800 p-2 rounded-full hover:bg-gray-600">
                                 <Twitter size={20} className="text-white/60 hover:text-[#BF301E]" />
                             </a>
                         </div>

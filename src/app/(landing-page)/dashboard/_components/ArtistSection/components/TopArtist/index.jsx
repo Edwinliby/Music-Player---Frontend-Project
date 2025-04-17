@@ -3,16 +3,16 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
-import Link from 'next/link';
+import { usePlayAndNavigate } from '@/hooks/usePlayAndNavigate'
 
 export default function Artist({ data }) {
+    const handlePlayAndNavigate = usePlayAndNavigate()
     const scrollRef = useRef(null)
     const [showLeftFade, setShowLeftFade] = useState(false)
     const [showRightFade, setShowRightFade] = useState(false)
     const [hoveredCard, setHoveredCard] = useState(null)
     const [isTouchDevice, setIsTouchDevice] = useState(false)
 
-    // Check if touch device
     useEffect(() => {
         const checkTouch = () => {
             setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0)
@@ -110,21 +110,20 @@ export default function Artist({ data }) {
                             onMouseLeave={() => {
                                 if (!isTouchDevice) setHoveredCard(null)
                             }}
+                            onClick={() => handlePlayAndNavigate(index, item)}
                         >
-                            <Link href={item.link}>
-                                <div className='relative rounded-lg overflow-hidden mb-1'>
-                                    <img
-                                        src={item.artistImg}
-                                        alt={item.title}
-                                        className='w-40 h-40 object-cover rounded-full'
-                                    />
-                                    {(!isTouchDevice && hoveredCard === index) || isTouchDevice ? (
-                                        <Play className='fill-black text-black absolute bottom-1 right-1 bg-green-500 rounded-full p-2 w-11 h-11 transition-opacity duration-300' />
-                                    ) : null}
-                                </div>
-                                <b className='text-sm font-semibold text-gray-500'>{item.author}</b>
-                                <p className='text-xs font-medium'>Artist</p>
-                            </Link>
+                            <div className='relative rounded-lg overflow-hidden mb-1'>
+                                <img
+                                    src={item.artistImg}
+                                    alt={item.title}
+                                    className='w-40 h-40 object-cover rounded-full'
+                                />
+                                {(!isTouchDevice && hoveredCard === index) || isTouchDevice ? (
+                                    <Play className='fill-black text-black absolute bottom-1 right-1 bg-green-500 rounded-full p-2 w-11 h-11 transition-opacity duration-300' />
+                                ) : null}
+                            </div>
+                            <b className='text-sm font-semibold text-gray-500'>{item.author}</b>
+                            <p className='text-xs font-medium'>Artist</p>
                         </motion.div>
                     ))}
                 </div>

@@ -2,7 +2,7 @@
 
 import { useMusicPlayer } from '@/context/MusicPlayerContext'
 import NowPlaying from './_components/NowPlaying';
-import SearchBar from '@/app/components/SearchBar';
+import SearchBar from '@/app/components/searchBar';
 import ArtistSection from './_components/ArtistSection';
 
 export default function Page() {

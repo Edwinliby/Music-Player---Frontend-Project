@@ -19,10 +19,9 @@ const menuLinks = [
 ];
 
 const socialLinks = [
-    { name: "Instagram", link: "#" },
-    { name: "Linkedin", link: "#" },
-    { name: "Twitter", link: "#" },
-    { name: "YouTube", link: "#" },
+    { name: "Linkedin", link: "https://www.linkedin.com/in/edwinliby/" },
+    { name: "Twitter", link: "https://x.com/EdwinLiby" },
+    { name: "Github", link: "https://github.com/Edwinliby" },
 ]
 
 export default function Navbar() {
@@ -147,6 +146,7 @@ export default function Navbar() {
                                 href={item.link}
                                 key={item.name}
                                 aria-label="links"
+                                target='_blank'
                                 className={`text-black w-fit font-medium hover:text-[var(--red)] hover:-translate-y-2 transition duration-300 ease-in-out`}
                             >
                                 {item.name}

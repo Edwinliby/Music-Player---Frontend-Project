@@ -1,31 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
 import NowPlaying from '../../_components/NowPlaying';
-import SearchBar from '@/app/components/SearchBar';
+import SearchBar from '@/app/components/searchBar';
 import { Ellipsis, Star, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function PodcastPage() {
-    const searchParams = useSearchParams();
     const [isFollowing, setIsFollowing] = useState(false)
-
     const FollowToggle = () => {
         setIsFollowing((prev) => !prev)
     }
 
-    const author = searchParams.get('author');
-    const title = searchParams.get('title');
-    const authorImg = searchParams.get('authorImg');
-    const about = searchParams.get('about');
-
     const {
+        currentIndex,
         currentSong,
         isPlaying,
+        setCurrentIndex,
         handleTogglePlay,
     } = useMusicPlayer();
+
+    const searchParams = useSearchParams()
+    const [artistData, setArtistData] = useState(null)
+
+    useEffect(() => {
+        const raw = searchParams.get('data')
+        if (raw) {
+            try {
+                const parsed = JSON.parse(decodeURIComponent(raw))
+                setArtistData(parsed)
+            } catch (err) {
+                console.error('Failed to parse artist data:', err)
+            }
+        }
+    }, [searchParams])
+
+    if (!artistData) return <div className='h-full w-full flex justify-center items-center'>Loading...</div>
 
     return (
         <div className="h-full w-full flex justify-between">
@@ -40,14 +52,14 @@ export default function PodcastPage() {
                         transition={{ duration: 0.6, ease: 'easeOut' }}
                     >
                         <img
-                            src={authorImg}
-                            alt={title}
+                            src={artistData.artistImg}
+                            alt={artistData.title}
                             className="w-[10rem] h-[10rem] md:w-[15rem] md:h-[15rem] rounded-xl shadow-2xl object-cover"
                         />
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm'>Public Playlist</p>
-                            <h1 className='font-extrabold text-5xl xl:text-6xl'>This Is {author}</h1>
-                            <p className='text-xl font-semibold'>{author}</p>
+                            <h1 className='font-extrabold text-5xl xl:text-6xl'>This Is {artistData.author}</h1>
+                            <p className='text-xl font-semibold'>{artistData.author}</p>
                         </div>
                     </motion.div>
 
@@ -69,7 +81,7 @@ export default function PodcastPage() {
 
                         <div className='flex flex-col gap-3'>
                             <b className='text-2xl font-semibold'>About</b>
-                            <p className='text-black/80'>{about}</p>
+                            <p className='text-black/80'>{artistData.about}</p>
                             <div className='flex items-center gap-2'>
                                 <button className='border cursor-pointer rounded-4xl px-2'>4.4</button> <Star size={20} /> <span className='text-black/60 text-sm'>(2.6K)</span>
                             </div>
@@ -89,13 +101,13 @@ export default function PodcastPage() {
                                     className='relative flex items-start gap-4 p-2 md:p-4 rounded-xl hover:bg-gray-100 active-hover:bg-gray-100'
                                 >
                                     <img
-                                        src={authorImg}
-                                        alt={title}
+                                        src={artistData.artistImg}
+                                        alt={artistData.title}
                                         className="w-[8rem] h-[8rem] rounded-xl shadow-lg object-cover"
                                     />
                                     <div className='flex flex-col gap-2'>
                                         <h2 className='font-semibold text-sm md:text-xl'>How to unlock your brain's full potential using a piece of paper.</h2>
-                                        <p className='font-medium text-xs md:text-base text-gray-500'>{author} • Podcast</p>
+                                        <p className='font-medium text-xs md:text-base text-gray-500'>{artistData.author} • Podcast</p>
                                         <p className='font-medium text-sm text-gray-500'>16 April 2025</p>
                                     </div>
                                     <Play className='absolute bottom-4 right-4 w-6 h-6 fill-black' />

@@ -70,6 +70,11 @@ export default function NowPlaying({ song, isPlaying }) {
             <div ref={topRef} className='h-fit'>
                 <h2 className='flex items-center gap-2 px-4 pt-4 pb-1 font-semibold'>
                     <AudioLines /> Now Playing
+                    <span className='flex items-center text-[.6rem] text-gray-500'>
+                        (<span className='w-8 overflow-hidden'>
+                            <p className='animate-(--animate-marquee) whitespace-nowrap'>{song.title}</p>
+                        </span>)
+                    </span>
                 </h2>
 
                 <div className='relative px-4 py-4'>
@@ -88,8 +93,8 @@ export default function NowPlaying({ song, isPlaying }) {
                     h-[calc(100%-21%)] w-[calc(100%-35%)] rounded-full overflow-hidden border-2 border-gray-300
                     '>
                         <div className='absolute top-0 left-0 z-10 bg-black/30 w-full h-full'>
-                            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rounded-full bg-gray-200 w-14 h-14 border-8 border-gray-700'>
-                                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 rounded-full bg-gray-400 w-2 h-2' />
+                            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rounded-full bg-gradient-to-br from-[#767977] via-[#c1c1c1] to-[#989898] w-14 h-14 border-8 border-gray-700'>
+                                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 rounded-full bg-gray-100 w-1.5 h-1.5' />
                             </div>
                         </div>
                         <motion.img
@@ -122,10 +127,6 @@ export default function NowPlaying({ song, isPlaying }) {
                         className="w-full fit object-bottom object-cover bg-gray-300"
                     />
                     <div className='z-20 absolute bottom-0 right-0 px-2 xl:px-4 py-1 xl:py-2 w-full h-fit flex items-center justify-between'>
-                        <span>
-                            {/* <b className="font-semibold text-lg">{song.title}</b> */}
-                            {/* <p className="text-xs md:text-xs font-semibold text-gray-700 pb-1">{song.author}</p> */}
-                        </span>
                         <motion.button
                             whileTap={{ scale: 0.8 }}
                             whileHover={{ scale: 1.2 }}
@@ -178,7 +179,7 @@ export default function NowPlaying({ song, isPlaying }) {
                     {
                         song.subSongs?.length > 0 && (
                             <div className='flex flex-col gap-2 px-1'>
-                                <b className='px-2 xl:px-3 text-sm font-medium'>Other Songs</b>
+                                <b className='px-2 xl:px-3 text-sm font-medium'>Other list</b>
                                 {song.subSongs?.map((item, index) => (
                                     <motion.div
                                         key={index}

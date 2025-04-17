@@ -29,7 +29,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="hidden md:flex flex-col gap-16 overflow-x-visible absolute top-0 left-0 h-full z-10 text-white bg-black/50 backdrop-blur-2xl px-4 xl:px-6 py-8"
             >
-                {/* Toggle Button */}
                 <div
                     onClick={toggleSidebar}
                     className="cursor-pointer flex items-center gap-2 text-sm"
@@ -54,7 +53,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                     {isOpen ? <img src="/mainWhiteLogo.webp" alt="logo" draggable={false} className='w-22 h-12 object-contain' /> : ""}
                 </div>
 
-                {/* Main Navigation */}
                 <div className="flex flex-col gap-8 text-sm">
                     <motion.div
                         initial={{ opacity: 0 }}
