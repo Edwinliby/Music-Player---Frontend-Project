@@ -41,17 +41,16 @@ export default function SearchBar({ className }) {
 
   return (
     <>
-      <div className={`h-[6.5%] md:h-[12%] pb-2 md:pb-0 w-full flex items-center text-gray-400 gap-4 border-b border-gray-300 cursor-pointer ${className ? className : ''}`}>
+      <div className={`h-[4rem] p-4 w-full flex items-center text-gray-400 gap-4 cursor-pointer shadow ${className ? className : ''}`}>
         <motion.a whileHover={{ color: "#1DB954" }} whileTap={{ scale: 0.9, color: "#1DB954" }} className='cursor-pointer hidden md:block' href='/dashboard'><House /></motion.a>
         <div className='flex items-center justify-between gap-2 w-full group'>
           <Search />
           <input
             type="text"
-            autoFocus
             placeholder="What do you want to play?"
             className="bg-transparent outline-none text-sm font-medium text-black placeholder-gray-400 w-full"
           />
-          <kbd className="opacity-0 group-hover:opacity-100 flex items-center gap-1 text-xs text-gray-500 border border-gray-300 px-1 py-0.5 rounded bg-gray-50">
+          <kbd className="opacity-0 group-hover:opacity-100 flex items-center gap-1 text-xs text-gray-700 border border-gray-400 px-1 py-0.5 rounded">
             Ctrl <span className="text-gray-400">+</span> K
           </kbd>
         </div>

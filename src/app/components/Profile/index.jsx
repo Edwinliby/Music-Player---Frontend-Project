@@ -23,7 +23,7 @@ export default function Profile({ isOpen, setIsOpen }) {
     }, [])
 
     return (
-        <div className='z-50 absolute right-2 md:bottom-4 md:left-4 w-fit h-fit' ref={dropdownRef}>
+        <div className='z-50 absolute top-2 right-2 md:top-auto md:bottom-4 md:left-4 w-fit h-fit' ref={dropdownRef}>
             <div className='relative flex items-center gap-4'>
                 <motion.div
                     whileTap={{ scale: 0.9 }}
@@ -44,22 +44,20 @@ export default function Profile({ isOpen, setIsOpen }) {
                 )}
 
                 {isMenu && (
-                    <div className="absolute right-0 top-14 bottom-auto md:top-auto md:left-0 md:bottom-14 w-40 bg-white rounded shadow-lg z-10">
+                    <div className="absolute right-2 top-14 bottom-auto md:top-auto md:left-0 md:bottom-16 w-40 bg-gray-900 shadow shadow-gray-700 text-white rounded z-10">
                         <div className="py-1">
-                            <a href="#" className="flex justify-between items-center px-4 py-3 hover:bg-gray-200">
-                                Account
-                                <ExternalLink size={16} />
+                            <a href="/dashboard/profile" className="flex justify-between items-center px-4 py-3 hover:bg-gray-800">
+                                Profile
                             </a>
-                            <div className="border-t border-gray-700 my-1"></div>
-                            <a href="#" className="flex justify-between items-center px-4 py-3 hover:bg-gray-200">
+                            <div className="border-t border-t-gray-700 my-1"></div>
+                            <a href="#" className="flex justify-between items-center px-4 py-3 hover:bg-gray-800">
                                 Support
-                                <ExternalLink size={16} />
                             </a>
-                            <a href="/dashboard/settings" className="block px-4 py-3 hover:bg-gray-200">
+                            <a href="/dashboard/settings" className="block px-4 py-3 hover:bg-gray-800">
                                 Settings
                             </a>
-                            <div className="border-t border-gray-700 my-1"></div>
-                            <a href="/" className="block px-4 py-3 hover:bg-gray-200">
+                            <div className="border-t border-t-gray-700 my-1"></div>
+                            <a href="/" className="block px-4 py-3 hover:bg-gray-800">
                                 Log out
                             </a>
                         </div>

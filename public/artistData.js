@@ -1,7 +1,7 @@
 export const data = [
   {
     coverImg:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1654364983410-78abbe7cebe9?q=80&w=400&fit=crop&auto=format",
     artistImg: "/artist/1.webp",
     title: "Alone",
     author: "Marshmello",
@@ -267,7 +267,7 @@ export const data = [
   },
   {
     coverImg:
-      "https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1606614520047-8ad516d9d84b?q=80&w=400&fit=crop&auto=format",
     artistImg: "/artist/4.webp",
     title: "The Nights",
     author: "Avicii",
@@ -524,7 +524,7 @@ export const data = [
   },
   {
     coverImg:
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1724778095377-16f15abdd968?q=80&w=400&fit=crop&auto=format",
     artistImg: "/artist/7.webp",
     title: "Rap God",
     author: "Eminem",

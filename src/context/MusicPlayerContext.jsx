@@ -43,7 +43,7 @@ export const MusicPlayerProvider = ({ children }) => {
         setIsPlaying(true);
     };
 
-    const playPlaylist = (newSongs, index = 0, autoPlay = true) => {
+    const playPlaylist = (newSongs, index = 0, autoPlay = false) => {
         setSongs(Array.isArray(newSongs) ? newSongs : []);
         setCurrentIndex(index);
         setIsPlaying(autoPlay); // Only play if autoPlay is true

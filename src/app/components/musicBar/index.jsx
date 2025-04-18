@@ -36,6 +36,18 @@ export default function MusicBar({
     const [playOnLoad, setPlayOnLoad] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
+    const [isSmallScreen, setIsSmallScreen] = useState(false)
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 721)
+        }
+
+        handleResize() // set on initial render
+        window.addEventListener('resize', handleResize)
+
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
@@ -202,7 +214,7 @@ export default function MusicBar({
                 className="relative bottom-14 md:bottom-0 w-full px-4 py-3 md:px-6 md:py-4 bg-white shadow-[0_-10px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4 md:gap-0 z-50"
             >
                 {/* Song Info */}
-                <div className="flex items-center gap-2 md:gap-4">
+                <div className="flex items-center gap-2 md:gap-4 flex-2 md:flex-1">
                     <div className='relative w-12 h-12 md:w-14 md:h-14 rounded-md cursor-pointer overflow-hidden group'>
                         <img
                             src={song?.coverImg || "/bg.webp"}
@@ -214,13 +226,17 @@ export default function MusicBar({
                         </span>
                     </div>
                     <div className="flex flex-col">
-                        <b className="text-sm font-medium">{song.title}</b>
+                        <b className="text-sm font-medium">
+                            {isSmallScreen && song.title.length > 10
+                                ? song.title.slice(0, 10) + '...'
+                                : song.title}
+                        </b>
                         <p className="text-[.7rem] md:text-xs text-gray-500 pb-1">{song.author}</p>
                     </div>
                 </div>
 
                 {/* Controls and Visualizer */}
-                <div className="flex items-center gap-8 w-fit xl:w-full xl:max-w-2xl mx-auto">
+                <div className="flex items-center gap-8 w-fit xl:w-full xl:max-w-2xl mx-auto md:flex-2">
                     <div className="flex items-center gap-4">
                         <SkipBack size={20} onClick={handlePrev} className="cursor-pointer" />
                         <span
@@ -251,7 +267,7 @@ export default function MusicBar({
                 </div>
 
                 {/* Right Side: Shuffle, Like, Volume */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-end gap-4 md:flex-1">
                     {/* Shuffle */}
                     <motion.button
                         whileTap={{ scale: 0.8 }}

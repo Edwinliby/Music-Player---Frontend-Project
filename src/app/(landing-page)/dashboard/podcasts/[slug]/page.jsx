@@ -15,10 +15,9 @@ export default function PodcastPage() {
     }
 
     const {
-        currentIndex,
         currentSong,
         isPlaying,
-        setCurrentIndex,
+        playPlaylist,
         handleTogglePlay,
     } = useMusicPlayer();
 
@@ -31,6 +30,7 @@ export default function PodcastPage() {
             try {
                 const parsed = JSON.parse(decodeURIComponent(raw))
                 setArtistData(parsed)
+                playPlaylist(parsed.subSongs)
             } catch (err) {
                 console.error('Failed to parse artist data:', err)
             }
@@ -41,10 +41,9 @@ export default function PodcastPage() {
 
     return (
         <div className="h-full w-full flex justify-between">
-            <div className='w-full lg:w-[75%] flex flex-col'>
-                <SearchBar className={'p-4 md:px-6'} />
+            <div className='w-full lg:w-[73%] xl:w-[78%] flex flex-col'>
+                <SearchBar />
                 <div className='custom-scrollbar h-full'>
-                    {/* Header Section */}
                     <motion.div
                         className='relative flex flex-wrap items-end gap-6 p-4 md:p-6 mt-4 md:mt-10'
                         initial={{ opacity: 0, y: 20 }}
@@ -91,14 +90,13 @@ export default function PodcastPage() {
                             <b className='text-2xl font-semibold'>All Episodes</b>
                             <hr className='border border-black/10' />
 
-                            {/* Animated Episode Cards */}
                             {[1, 2, 3, 4].map((_, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
-                                    className='relative flex items-start gap-4 p-2 md:p-4 rounded-xl hover:bg-gray-100 active-hover:bg-gray-100'
+                                    className='relative flex items-start gap-4 p-2 md:p-4 rounded-xl hover:bg-gray-100 active-hover:bg-gray-100 border border-transparent hover:border-gray-200'
                                 >
                                     <img
                                         src={artistData.artistImg}
@@ -118,7 +116,7 @@ export default function PodcastPage() {
                 </div>
             </div>
 
-            <div className='hidden lg:block w-[14rem] xl:w-[25%]'>
+            <div className='hidden lg:block w-[27%] xl:w-[22%]'>
                 <NowPlaying
                     song={currentSong}
                     isPlaying={isPlaying}

@@ -12,6 +12,7 @@ export default function ArtistPage() {
         currentIndex,
         currentSong,
         isPlaying,
+        playPlaylist,
         setCurrentIndex,
         handleTogglePlay,
     } = useMusicPlayer();
@@ -25,6 +26,7 @@ export default function ArtistPage() {
             try {
                 const parsed = JSON.parse(decodeURIComponent(raw))
                 setArtistData(parsed)
+                playPlaylist(parsed.subSongs)
             } catch (err) {
                 console.error('Failed to parse artist data:', err)
             }
@@ -35,7 +37,7 @@ export default function ArtistPage() {
 
     return (
         <div className="h-full w-full flex justify-between">
-            <div className='w-full lg:w-[75%] flex flex-col'>
+            <div className='w-full lg:w-[73%] xl:w-[78%] flex flex-col'>
                 <SearchBar className={'px-4 md:px-6'} />
                 <div className='custom-scrollbar h-full'>
                     <div className='relative'>
@@ -61,39 +63,41 @@ export default function ArtistPage() {
                             <span className='hidden md:block flex-1 text-left'>Date added</span>
                             <span className='text-right'><Clock size={20} /></span>
                         </div>
-                        {
-                            artistData.subSongs.map((song, index) => (
-                                <div
-                                    key={index}
-                                    className={`text-gray-600 flex items-center py-2 hover:bg-gray-100 px-4 md:px-6 cursor-pointer ${index === currentIndex ? 'bg-gray-100' : ''}`}
-                                    onClick={() => {
-                                        setCurrentIndex(index);
-                                    }}
-                                >
-                                    <span className='w-8 text-left'>
-                                        {index === currentIndex ? (
-                                            <Play size={20} className='fill-gray-500 text-gray-500 relative -left-1.5' />
-                                        ) : (
-                                            index + 1
-                                        )}
-                                    </span>
-                                    <div className='flex-1 flex items-center gap-2'>
-                                        <img src={song.coverImg} alt={song.title} className='w-12 h-12 rounded object-cover' />
-                                        <div>
-                                            <b>{song.title}</b>
-                                            <p className='text-sm'>{artistData.author}</p>
+                        <div className='custom-scrollbar h-[20rem] lg:h-fit pb-10 md:pb-4'>
+                            {
+                                artistData.subSongs.map((song, index) => (
+                                    <div
+                                        key={index}
+                                        className={`text-gray-600 flex items-center py-2 hover:bg-gray-100 px-4 md:px-6 cursor-pointer ${index === currentIndex ? 'bg-gray-100' : ''}`}
+                                        onClick={() => {
+                                            setCurrentIndex(index);
+                                        }}
+                                    >
+                                        <span className='w-8 text-left'>
+                                            {index === currentIndex ? (
+                                                <Play size={20} className='fill-gray-500 text-gray-500 relative -left-1.5' />
+                                            ) : (
+                                                index + 1
+                                            )}
+                                        </span>
+                                        <div className='flex-1 flex items-center gap-2'>
+                                            <img src={song.coverImg} alt={song.title} className='w-12 h-12 rounded object-cover' />
+                                            <div>
+                                                <b>{song.title}</b>
+                                                <p className='text-sm'>{artistData.author}</p>
+                                            </div>
                                         </div>
+                                        <span className='hidden md:block flex-1 text-sm'>{song.album}</span>
+                                        <span className='hidden md:block flex-1 text-sm'>{song.date}</span>
+                                        <span className='text-sm text-right'>{song.timestamp}</span>
                                     </div>
-                                    <span className='hidden md:block flex-1 text-sm'>{song.album}</span>
-                                    <span className='hidden md:block flex-1 text-sm'>{song.date}</span>
-                                    <span className='text-sm text-right'>{song.timestamp}</span>
-                                </div>
-                            ))
-                        }
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className='hidden lg:block w-[14rem] xl:w-[25%]'>
+            <div className='hidden lg:block w-[27%] xl:w-[22%]'>
                 <NowPlaying song={currentSong} isPlaying={isPlaying} togglePlay={handleTogglePlay} />
             </div>
         </div>

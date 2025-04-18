@@ -26,14 +26,15 @@ function LayoutContent({ children }) {
   }, []);
 
   return (
-    <div className="relative w-full h-[calc(100vh-4rem)] md:h-screen flex justify-end bg-[url(/bg.webp)] bg-cover bg-center bg-no-repeat">
+    <div className="relative w-full h-[calc(100vh-3.5rem)] md:h-screen flex justify-end bg-cover bg-center bg-no-repeat">
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <Profile isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div
-        className={`relative z-10 h-full bg-white md:rounded-l-4xl transition-all duration-300 overflow-hidden
+        className={`relative z-10 h-full md:rounded-l-4xl transition-all duration-300 overflow-hidden
           ${isSidebarOpen ? "w-full md:w-[80%] xl:w-[85%]" : "w-full md:w-[93%] xl:w-[95%]"}`}
       >
-        <div className="h-full flex flex-col justify-between">
+        <img src="/bg.webp" alt="backkground" draggable={false} className="-z-10 absolute left-0 top-0 object-cover object-center w-full h-full" />
+        <div className="h-full flex flex-col justify-between bg-white/90 backdrop-blur-[100px]">
           <div
             className="overflow-hidden"
             style={{ height: `calc(100% - ${musicBarHeight}px)` }}

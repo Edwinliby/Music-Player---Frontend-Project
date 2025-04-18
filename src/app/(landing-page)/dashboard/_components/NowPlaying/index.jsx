@@ -65,7 +65,7 @@ export default function NowPlaying({ song, isPlaying }) {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4 }}
-            className='hidden lg:block bg-[#fff] w-full h-full overflow-hidden shadow'
+            className='hidden lg:block w-full h-full overflow-hidden shadow'
         >
             <div ref={topRef} className='h-fit'>
                 <h2 className='flex items-center gap-2 px-4 pt-4 pb-1 font-semibold'>
@@ -90,7 +90,7 @@ export default function NowPlaying({ song, isPlaying }) {
                     />
 
                     <div className='absolute top-8 left-8 lg:top-6 lg:left-6.5 xl:top-8 xl:left-8 2xl:top-9 2xl:left-9
-                    h-[calc(100%-21%)] w-[calc(100%-35%)] rounded-full overflow-hidden border-2 border-gray-300
+                    h-[calc(100%-25%)] w-[calc(100%-37%)] rounded-full overflow-hidden border-2 border-gray-300
                     '>
                         <div className='absolute top-0 left-0 z-10 bg-black/30 w-full h-full'>
                             <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rounded-full bg-gradient-to-br from-[#767977] via-[#c1c1c1] to-[#989898] w-14 h-14 border-8 border-gray-700'>
@@ -112,7 +112,6 @@ export default function NowPlaying({ song, isPlaying }) {
                 className="relative flex flex-col gap-2 pb-4 custom-scrollbar"
                 style={{ height: `calc(100% - ${topHeight}px)` }}
             >
-                <div className="absolute top-0 left-0 z-10 bg-gradient-to-t from-transparent to-[#fff] w-full h-1/2" />
                 <motion.div
                     className="relative flex flex-col items-center gap-2 md:gap-4"
                     initial={{ opacity: 0, y: 10 }}
@@ -126,7 +125,7 @@ export default function NowPlaying({ song, isPlaying }) {
                         height={500}
                         className="w-full fit object-bottom object-cover bg-gray-300"
                     />
-                    <div className='z-20 absolute bottom-0 right-0 px-2 xl:px-4 py-1 xl:py-2 w-full h-fit flex items-center justify-between'>
+                    <div className='z-20 absolute bottom-2 right-2'>
                         <motion.button
                             whileTap={{ scale: 0.8 }}
                             whileHover={{ scale: 1.2 }}

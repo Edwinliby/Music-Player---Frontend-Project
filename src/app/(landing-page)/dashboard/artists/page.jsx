@@ -34,15 +34,15 @@ export default function Page() {
   }
 
   return (
-    <div className="h-full flex flex-col justify-between px-4 md:px-6 pt-4 md:pt-0">
+    <div className="h-full flex flex-col justify-between">
       <SearchBar />
-      <div className="relative bottom-10 md:bottom-0 w-full h-[88%] overflow-hidden">
+      <div className="relative -z-0 bottom-10 md:bottom-0 w-full h-[calc(100%-6.75rem)] md:h-[calc(100%-4.15rem)] overflow-hidden">
         <div className="custom-scrollbar h-full">
           <div className='overflow-hidden'>
-            <h2 className="text-2xl font-bold py-4">
+            <h2 className="text-2xl font-extrabold p-4">
               Best of Artists
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 mb-6 px-2">
               {data.map((item, index) => (
                 <motion.div
                   key={index}

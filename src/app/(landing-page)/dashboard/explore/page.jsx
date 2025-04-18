@@ -47,14 +47,14 @@ export default function Page() {
     }, [])
 
     return (
-        <div className="h-full flex flex-col justify-between px-4 md:px-6 pt-4 md:pt-0">
+        <div className="h-full flex flex-col justify-between">
             <SearchBar />
-            <div className="relative bottom-10 md:bottom-0 w-full h-[88%] overflow-hidden">
+            <div className="relative bottom-10 md:bottom-0 w-full h-[calc(100%-6.75rem)] md:h-[calc(100%-4.15rem)] overflow-hidden">
                 <div className="custom-scrollbar h-full">
 
-                    <div className='overflow-hidden flex flex-col'>
-                        <div className='flex flex-col gap-2 py-6'>
-                            <h2 className='font-semibold text-xl'>Top Categories</h2>
+                    <div className='overflow-hidden flex flex-col gap-2'>
+                        <div className='flex flex-col gap-2 p-4 py-6'>
+                            <h2 className='font-extrabold text-xl'>Top Categories</h2>
                             <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-4 py-2'>
                                 {
                                     catList.map((item, index) => {
@@ -81,8 +81,8 @@ export default function Page() {
                             </div>
                         </div>
 
-                        <div className='w-full my-6'>
-                            <h2 className='font-semibold text-xl flex item-center justify-between w-full'>
+                        <div className='w-full'>
+                            <h2 className='font-extrabold px-4 text-xl flex item-center justify-between w-full'>
                                 Discover Weekly
                                 <a href="/dashboard/artist" className='text-sm text-gray-500 font-medium'>Show all</a>
                             </h2>
@@ -172,8 +172,8 @@ export default function Page() {
 
                         <TopArtist data={data} />
 
-                        <div className='flex flex-col gap-2 py-4 md:py-6'>
-                            <h2 className='font-semibold text-xl flex item-center justify-between w-full'>
+                        <div className='flex flex-col gap-2 p-4'>
+                            <h2 className='font-extrabold text-xl flex item-center justify-between w-full'>
                                 Popular Podcasts
                                 <a href="/dashboard/podcasts" className='text-sm text-gray-500 font-medium'>Show all</a>
                             </h2>

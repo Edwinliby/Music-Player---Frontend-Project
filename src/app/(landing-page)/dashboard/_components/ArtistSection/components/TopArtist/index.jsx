@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { usePlayAndNavigate } from '@/hooks/usePlayAndNavigate'
 
@@ -43,40 +43,13 @@ export default function Artist({ data }) {
 
     return (
         <div className='w-full my-6'>
-            <h2 className='text-xl font-semibold mb-2'>Popular artists</h2>
+            <h2 className='text-xl font-extrabold p-4'>Popular artists</h2>
             <div className="relative w-full group">
-
-                {/* Gradients */}
-                <AnimatePresence>
-                    {showRightFade && (
-                        <motion.div
-                            key="right-fade"
-                            className='pointer-events-none absolute -right-0.5 h-full w-14 bg-gradient-to-l from-white z-10'
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        />
-                    )}
-                </AnimatePresence>
-                <AnimatePresence>
-                    {showLeftFade && (
-                        <motion.div
-                            key="left-fade"
-                            className='pointer-events-none absolute -left-0.5 h-full w-14 bg-gradient-to-r from-white z-10'
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        />
-                    )}
-                </AnimatePresence>
-
                 {/* Scroll Buttons */}
                 {showLeftFade && (
                     <button
                         onClick={() => scroll('left')}
-                        className="absolute left-0 z-20 top-1/2 -translate-y-1/2 p-1 bg-white rounded-full shadow hover:bg-gray-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="absolute left-2 z-20 top-1/2 -translate-y-1/2 p-1 bg-white rounded-full shadow hover:bg-gray-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
                         <ChevronLeft />
                     </button>
@@ -84,7 +57,7 @@ export default function Artist({ data }) {
                 {showRightFade && (
                     <button
                         onClick={() => scroll('right')}
-                        className="absolute right-0 z-20 top-1/2 -translate-y-1/2 p-1 bg-white rounded-full shadow hover:bg-gray-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="absolute right-2 z-20 top-1/2 -translate-y-1/2 p-1 bg-white rounded-full shadow hover:bg-gray-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
                         <ChevronRight />
                     </button>

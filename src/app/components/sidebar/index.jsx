@@ -27,31 +27,27 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                 initial={false}
                 animate={{ width: isOpen ? '20rem' : '10rem' }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="hidden md:flex flex-col gap-16 overflow-x-visible absolute top-0 left-0 h-full z-10 text-white bg-black/50 backdrop-blur-2xl px-4 xl:px-6 py-8"
+                className="hidden md:flex flex-col gap-16 overflow-x-visible absolute top-0 left-0 h-full z-10 text-white bg-[var(--foreground)] backdrop-blur-2xl px-4 xl:px-6 py-8"
             >
-                <div
-                    onClick={toggleSidebar}
-                    className="cursor-pointer flex items-center gap-2 text-sm"
+                <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1, duration: 0.3, ease: 'easeInOut' }}
+                    className="flex items-center gap-2 text-sm"
                 >
-                    {isHovered ? (
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={isOpen ? 'left' : 'right'}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                                whileTap={{ scale: 0.9 }}
-                            >
-                                {isOpen ? <PanelLeftClose /> : <PanelRightClose />}
-                            </motion.div>
-                        </AnimatePresence>
-                    ) : <>
-                        {!isOpen && <PanelRightClose />}
-                    </>}
-
+                    <motion.span
+                        whileTap={{ scale: 0.9 }}
+                        onClick={toggleSidebar}
+                        className="cursor-pointer"
+                    >
+                        {isHovered ? (
+                            isOpen ? <PanelLeftClose className='hover:text-gray-300' /> : <PanelRightClose className='hover:text-gray-300' />
+                        ) : <>
+                            {!isOpen && <PanelRightClose className='hover:text-gray-300' />}
+                        </>}
+                    </motion.span>
                     {isOpen ? <img src="/mainWhiteLogo.webp" alt="logo" draggable={false} className='w-22 h-12 object-contain' /> : ""}
-                </div>
+                </motion.div>
 
                 <div className="flex flex-col gap-8 text-sm">
                     <motion.div
