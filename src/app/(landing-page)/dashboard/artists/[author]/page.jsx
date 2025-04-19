@@ -41,7 +41,7 @@ export default function ArtistPage() {
                 <SearchBar className={'px-4 md:px-6'} />
                 <div className='custom-scrollbar h-full'>
                     <div className='relative'>
-                        <img src={artistData.coverImg} alt={artistData.title} draggable={false} className="w-full h-[18rem] object-cover" />
+                        <img src={artistData.coverImg} alt={artistData.title} draggable={false} className="w-full h-[20rem] lg:h-[18rem] object-cover" />
                         <div className='absolute bottom-0 left-0 w-full h-full bg-black/50' />
                         <div className='absolute bottom-8 inset-x-4 md:inset-x-8 text-white font-semibold'>
                             <p>Public Playlist</p>

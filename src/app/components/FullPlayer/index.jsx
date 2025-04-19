@@ -3,7 +3,7 @@
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
 import { useEffect, useRef, useState } from 'react';
 import {
-  Play, Pause, SkipForward, SkipBack, Heart, 
+  Play, Pause, SkipForward, SkipBack, Heart,
   Volume1, VolumeX, Shuffle, X, Repeat
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -62,11 +62,10 @@ const FullPlayer = () => {
   };
 
   useEffect(() => {
-    if (waveformRef.current) {
-      waveformContainer.current = waveformRef.current;
-      initWaveSurfer(waveformRef.current);
+    if (isFullPlayerOpen) {
+      waveformContainer.current && waveformContainer.current.scrollIntoView();
     }
-  }, []);
+  }, [isFullPlayerOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -86,6 +85,7 @@ const FullPlayer = () => {
       style={{ background: bgGradient, }}
       className="fixed inset-0 backdrop-blur-3xl text-white z-[9999] p-6 flex flex-col gap-16 items-center justify-center transition-all duration-700 setBgGradient('radial-gradient(circle at center, #2e2e2e, #1a1a1a)');"
     >
+      <div className='absolute left-0 top-0 w-full h-full bg-black/50 -z-10' />
       <button
         onClick={() => setIsFullPlayerOpen(false)}
         className="absolute top-4 right-4 text-white hover:text-gray-500"
@@ -118,7 +118,7 @@ const FullPlayer = () => {
           <span className="text-xs min-w-[40px]">
             {formatTime(currentTime)}
           </span>
-          <div ref={waveformRef} className="flex-1 h-fit cursor-pointer" />
+          <div ref={waveformRef} className="flex-1 h-16 cursor-pointer" />
           <span className="text-xs min-w-[40px] text-right">
             {formatTime(duration)}
           </span>

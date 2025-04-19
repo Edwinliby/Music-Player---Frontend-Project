@@ -11,11 +11,9 @@ const MusicPlayerContext = createContext(null);
 export const MusicPlayerProvider = ({ children }) => {
     const pathname = usePathname();
 
-    // Check if the route is a podcast route
-    const isPodcastRoute = pathname.includes('/dashboard/podcast');
+    const isPodcastRoute = pathname.includes('/dashboard/podcast/');
     const initialData = isPodcastRoute ? podData : songData;
 
-    // Ensure songs is always an array
     const [songs, setSongs] = useState(Array.isArray(initialData) ? initialData : []);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -35,15 +33,11 @@ export const MusicPlayerProvider = ({ children }) => {
 
     const currentSong = songs.length > 0 ? songs[currentIndex] : null;
 
-    const initWaveSurfer = (container) => {
-        if (!container) return;
-
-        if (wavesurfer.current) {
-            wavesurfer.current.destroy();
-        }
+    const initWaveSurfer = () => {
+        if (wavesurfer.current || !waveformContainer.current) return; // Skip if already initialized or container is not ready
 
         wavesurfer.current = WaveSurfer.create({
-            container,
+            container: waveformContainer.current,
             waveColor: '#D9D9D9',
             progressColor: '#13CA35',
             height: 30,
@@ -90,6 +84,12 @@ export const MusicPlayerProvider = ({ children }) => {
             wavesurfer.current.load(currentSong.music);
         }
     };
+
+    useEffect(() => {
+        if (isFullPlayerOpen) {
+            initWaveSurfer();
+        }
+    }, [isFullPlayerOpen]); // Reinitialize when the player is opened
 
     useEffect(() => {
         loadCurrentSong();

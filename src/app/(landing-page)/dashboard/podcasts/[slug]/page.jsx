@@ -10,9 +10,20 @@ import { motion } from 'framer-motion';
 
 export default function PodcastPage() {
     const [isFollowing, setIsFollowing] = useState(false)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     const FollowToggle = () => {
         setIsFollowing((prev) => !prev)
     }
+
+    const handleEllipsisClick = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleShareOption = (option) => {
+        console.log(`Shared via ${option}`);
+        setIsDropdownOpen(false); // Close dropdown after selecting option
+    };
 
     const {
         currentSong,
@@ -75,7 +86,38 @@ export default function PodcastPage() {
                             >
                                 {isFollowing ? 'Following' : 'Follow'}
                             </button>
-                            <Ellipsis />
+
+                            <div className="relative">
+                                <button onClick={handleEllipsisClick}>
+                                    <Ellipsis />
+                                </button>
+
+                                {isDropdownOpen && (
+                                    <div className="absolute mt-2 w-40 bg-black/50 text-white backdrop-blur-xl rounded-md shadow-lg z-20">
+                                        <ul>
+                                            <li
+                                                onClick={() => handleShareOption('Facebook')}
+                                                className="px-4 py-2 text-sm hover:bg-black/15 cursor-pointer"
+                                            >
+                                                Share on Facebook
+                                            </li>
+                                            <li
+                                                onClick={() => handleShareOption('Twitter')}
+                                                className="px-4 py-2 text-sm hover:bg-black/15 cursor-pointer"
+                                            >
+                                                Share on Twitter
+                                            </li>
+                                            <li
+                                                onClick={() => handleShareOption('LinkedIn')}
+                                                className="px-4 py-2 text-sm hover:bg-black/15 cursor-pointer"
+                                            >
+                                                Share on LinkedIn
+                                            </li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+
                         </div>
 
                         <div className='flex flex-col gap-3'>
