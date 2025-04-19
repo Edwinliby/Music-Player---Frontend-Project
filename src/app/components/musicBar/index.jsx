@@ -28,10 +28,11 @@ const MusicBar = () => {
         setIsFullPlayerOpen,
         currentTime, duration,
         loopMode, toggleLoop,
-        waveformContainer, initWaveSurfer
+        waveformContainer, initWaveSurfer,
+        waveformRef
     } = useMusicPlayer();
 
-    const waveformRef = useRef(null);
+    // const waveformRef = useRef(null);
     const [isSmallScreen, setIsSmallScreen] = useState(false)
 
     useEffect(() => {
@@ -77,7 +78,7 @@ const MusicBar = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="relative bottom-14 md:bottom-0 w-full px-4 py-3 md:px-6 md:py-4 bg-white shadow-[0_-10px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4 md:gap-0 z-50"
+            className="relative bottom-14 md:bottom-0 w-full px-4 py-3 md:px-6 md:py-4 bg-white shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.25)] flex items-center justify-between gap-4 md:gap-0 z-50"
         >
             {/* Song Info */}
             <div className="flex items-center gap-2 md:gap-4 flex-2 md:flex-1">

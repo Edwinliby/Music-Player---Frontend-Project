@@ -1,10 +1,10 @@
 'use client';
 
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Play, Pause, SkipForward, SkipBack, Heart,
-  Volume1, VolumeX, Shuffle, X, Repeat
+  Volume1, VolumeX, Shuffle, Minimize, Repeat
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ColorThief from 'colorthief';
@@ -21,10 +21,11 @@ const FullPlayer = () => {
     isFullPlayerOpen, setIsFullPlayerOpen,
     currentTime, duration,
     loopMode, toggleLoop,
-    waveformContainer, initWaveSurfer
+    waveformContainer, initWaveSurfer,
+    waveformRef
   } = useMusicPlayer();
 
-  const waveformRef = useRef(null);
+  // const waveformRef = useRef(null);
   const [bgGradient, setBgGradient] = useState('');
 
   useEffect(() => {
@@ -62,10 +63,11 @@ const FullPlayer = () => {
   };
 
   useEffect(() => {
-    if (isFullPlayerOpen) {
-      waveformContainer.current && waveformContainer.current.scrollIntoView();
+    if (waveformRef.current) {
+      waveformContainer.current = waveformRef.current;
+      initWaveSurfer(waveformRef.current);
     }
-  }, [isFullPlayerOpen]);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -90,7 +92,7 @@ const FullPlayer = () => {
         onClick={() => setIsFullPlayerOpen(false)}
         className="absolute top-4 right-4 text-white hover:text-gray-500"
       >
-        <X size={28} />
+        <Minimize size={28} />
       </button>
 
       <div className="flex flex-col items-center text-center">
@@ -118,7 +120,26 @@ const FullPlayer = () => {
           <span className="text-xs min-w-[40px]">
             {formatTime(currentTime)}
           </span>
-          <div ref={waveformRef} className="flex-1 h-16 cursor-pointer" />
+          {/* <div ref={waveformRef} className="w-full h-16 z-50 cursor-pointer" /> */}
+
+          <input
+            type="range"
+            min={0}
+            max={duration}
+            step={0.1}
+            value={currentTime}
+            onChange={(e) => {
+              const seekTime = parseFloat(e.target.value);
+              if (typeof window !== 'undefined') {
+                const audio = document.querySelector('audio');
+                if (audio) {
+                  audio.currentTime = seekTime;
+                }
+              }
+            }}
+            className="flex-1 custom-slider h-1 bg-white/50 rounded-md "
+          />
+
           <span className="text-xs min-w-[40px] text-right">
             {formatTime(duration)}
           </span>

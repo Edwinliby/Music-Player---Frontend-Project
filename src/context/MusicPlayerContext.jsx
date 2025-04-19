@@ -30,6 +30,7 @@ export const MusicPlayerProvider = ({ children }) => {
     const waveformContainer = useRef(null); // for UI to pass in
     const loopModeRef = useRef(loopMode);
     const shouldAutoPlayRef = useRef(false);
+    const waveformRef = useRef(null);
 
     const currentSong = songs.length > 0 ? songs[currentIndex] : null;
 
@@ -185,7 +186,8 @@ export const MusicPlayerProvider = ({ children }) => {
                 duration,
                 setDuration,
                 waveformContainer,
-                initWaveSurfer
+                initWaveSurfer,
+                waveformRef
             }}
         >
             {children}

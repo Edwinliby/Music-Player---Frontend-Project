@@ -160,11 +160,13 @@ export default function PodcastPage() {
                                         setCurrentIndex(index);
                                     }}
                                 >
-                                    <img
-                                        src={song.coverImg}
-                                        alt={song.title}
-                                        className="w-[8rem] h-[8rem] rounded-xl shadow-lg object-cover"
-                                    />
+                                    <div className='w-[8rem] h-[8rem] rounded-xl overflow-hidden shadow-lg group'>
+                                        <img
+                                            src={song.coverImg}
+                                            alt={song.title}
+                                            className="w-full h-full object-cover group-hover:scale-105 active-hover:scale-105 transition duration-300 ease-in-out"
+                                        />
+                                    </div>
                                     <div className='flex flex-col gap-2'>
                                         <h2 className='font-semibold text-sm md:text-xl'>{song.heading}</h2>
                                         <p className='font-medium text-xs md:text-base text-gray-500'>{song.author} • Podcast</p>
