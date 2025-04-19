@@ -11,6 +11,11 @@ import { motion } from 'framer-motion';
 export default function PodcastPage() {
     const [isFollowing, setIsFollowing] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [highlighted, setHighlighted] = useState(false);
+
+    const handleStarClick = () => {
+        setHighlighted((prev) => !prev);
+    };
 
     const FollowToggle = () => {
         setIsFollowing((prev) => !prev)
@@ -20,15 +25,15 @@ export default function PodcastPage() {
         setIsDropdownOpen(!isDropdownOpen);
     };
 
-    const handleShareOption = (option) => {
-        console.log(`Shared via ${option}`);
-        setIsDropdownOpen(false); // Close dropdown after selecting option
+    const handleShareOption = () => {
+        setIsDropdownOpen(false);
     };
 
     const {
         currentSong,
         isPlaying,
         playPlaylist,
+        setCurrentIndex,
         handleTogglePlay,
     } = useMusicPlayer();
 
@@ -120,11 +125,23 @@ export default function PodcastPage() {
 
                         </div>
 
-                        <div className='flex flex-col gap-3'>
+                        <div className='flex flex-col gap-3 z-20'>
                             <b className='text-2xl font-semibold'>About</b>
                             <p className='text-black/80'>{artistData.about}</p>
                             <div className='flex items-center gap-2'>
-                                <button className='border cursor-pointer rounded-4xl px-2'>4.4</button> <Star size={20} /> <span className='text-black/60 text-sm'>(2.6K)</span>
+                                <button className='border cursor-pointer rounded-4xl px-2'>4.4</button>
+                                <motion.button
+                                    whileTap={{ scale: 0.9 }}
+                                    onClick={handleStarClick}
+                                    className='text-yellow-500 cursor-pointer'
+                                >
+                                    <Star
+                                        size={20}
+                                        fill={highlighted ? 'gold' : 'none'}
+                                        stroke={highlighted ? 'gold' : 'currentColor'}
+                                    />
+                                </motion.button>
+                                <span className='text-black/60 text-sm'>(2.6K)</span>
                             </div>
                         </div>
 
@@ -132,25 +149,28 @@ export default function PodcastPage() {
                             <b className='text-2xl font-semibold'>All Episodes</b>
                             <hr className='border border-black/10' />
 
-                            {[1, 2, 3, 4].map((_, index) => (
+                            {artistData.subSongs.map((song, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
-                                    className='relative flex items-start gap-4 p-2 md:p-4 rounded-xl hover:bg-gray-100 active-hover:bg-gray-100 border border-transparent hover:border-gray-200'
+                                    className='group relative flex items-start gap-4 p-2 md:p-4 rounded-xl hover:bg-gray-100 active-hover:bg-gray-100 border border-transparent hover:border-gray-200'
+                                    onClick={() => {
+                                        setCurrentIndex(index);
+                                    }}
                                 >
                                     <img
-                                        src={artistData.artistImg}
-                                        alt={artistData.title}
+                                        src={song.coverImg}
+                                        alt={song.title}
                                         className="w-[8rem] h-[8rem] rounded-xl shadow-lg object-cover"
                                     />
                                     <div className='flex flex-col gap-2'>
-                                        <h2 className='font-semibold text-sm md:text-xl'>How to unlock your brain's full potential using a piece of paper.</h2>
-                                        <p className='font-medium text-xs md:text-base text-gray-500'>{artistData.author} • Podcast</p>
+                                        <h2 className='font-semibold text-sm md:text-xl'>{song.heading}</h2>
+                                        <p className='font-medium text-xs md:text-base text-gray-500'>{song.author} • Podcast</p>
                                         <p className='font-medium text-sm text-gray-500'>16 April 2025</p>
                                     </div>
-                                    <Play className='absolute bottom-4 right-4 w-6 h-6 fill-black' />
+                                    <Play className='hidden group-active:block group-hover:block absolute bottom-4 right-4 w-6 h-6 fill-black' />
                                 </motion.div>
                             ))}
                         </div>

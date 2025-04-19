@@ -17,6 +17,7 @@ export const data = [
         artistImg: "/podcast/p1.webp",
         coverImg:
           "https://images.unsplash.com/photo-1593697972496-8f31cba830f2?q=80&w=400&fit=crop&auto=format",
+        heading: "Deep Conversations on AI, Science & Life",
         title: "CIA Spy",
         author: "Lex Fridman",
         music: "/music2.mp3",
@@ -27,6 +28,7 @@ export const data = [
         artistImg: "/podcast/p1.webp",
         coverImg:
           "https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=400&fit=crop&auto=format",
+        heading: "Exploring Consciousness, Intelligence & Humanity",
         title: "Life & Death",
         author: "Lex Fridman",
         music: "/music2.mp3",
@@ -53,6 +55,7 @@ export const data = [
         artistImg: "/podcast/p2.webp",
         coverImg:
           "https://images.unsplash.com/flagged/photo-1563713076147-fad5d1acf076?q=80&w=400&fit=crop&auto=format",
+        heading: "Unlocking India’s Golden Future",
         title: "Figuring Out",
         author: "Raj Shamini",
         music: "/music1.mp3",
@@ -63,6 +66,7 @@ export const data = [
         artistImg: "/podcast/p2.webp",
         coverImg:
           "https://images.unsplash.com/flagged/photo-1563716297001-0e6cdade0198?q=80&w=400&fit=crop&auto=format",
+        heading: "Personal Growth for the New Indian Dream",
         title: "Figuring Out 2",
         author: "Raj Shamini",
         music: "/music2.mp3",
@@ -89,6 +93,7 @@ export const data = [
         artistImg: "/podcast/p3.webp",
         coverImg:
           "https://images.unsplash.com/photo-1594703276852-68829b071330?q=80&w=400&fit=crop&auto=format",
+        heading: "Fuel Your Fire with Fearless Motivation",
         title: "Remember Why",
         author: "Fearless",
         music: "/music2.mp3",
@@ -99,6 +104,7 @@ export const data = [
         artistImg: "/podcast/p3.webp",
         coverImg:
           "https://images.unsplash.com/photo-1659083725992-9d88c12e719c?q=80&w=400&fit=crop&auto=format",
+        heading: "The Power of Dreams and Determination",
         title: "Struggles",
         author: "Fearless",
         music: "/music1.mp3",
@@ -125,6 +131,7 @@ export const data = [
         artistImg: "/podcast/p4.webp",
         coverImg:
           "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=400&fit=crop&auto=format",
+        heading: "Finding Strength Through Pain and Purpose",
         title: "Apologize",
         author: "Arthur Morgan",
         music: "/music1.mp3",
@@ -135,6 +142,7 @@ export const data = [
         artistImg: "/podcast/p4.webp",
         coverImg:
           "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=400&fit=crop&auto=format",
+        heading: "Hardship, Growth & the Human Spirit",
         title: "Sacrifice",
         author: "Arthur Morgan",
         music: "/music2.mp3",
@@ -161,6 +169,7 @@ export const data = [
         artistImg: "/podcast/p5.webp",
         coverImg:
           "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?q=80&w=400&fit=crop&auto=format",
+        heading: "Explore the Cosmos of Consciousness",
         title: "Cosmos",
         author: "Lost Sky",
         music: "/music1.mp3",
@@ -171,6 +180,7 @@ export const data = [
         artistImg: "/podcast/p5.webp",
         coverImg:
           "https://images.unsplash.com/photo-1484589065579-248aad0d8b13?q=80&w=400&fit=crop&auto=format",
+        heading: "Expand Your Mind Beyond This World",
         title: "Secrets World",
         author: "Lost Sky",
         music: "/music2.mp3",
