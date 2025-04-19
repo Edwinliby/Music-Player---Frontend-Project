@@ -27,7 +27,7 @@ export const data = [
         artistImg: "/podcast/p1.webp",
         coverImg:
           "https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=400&fit=crop&auto=format",
-        title: "Life, Death",
+        title: "Life & Death",
         author: "Lex Fridman",
         music: "/music2.mp3",
         location: "USA",

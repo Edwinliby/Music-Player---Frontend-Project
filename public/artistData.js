@@ -75,18 +75,6 @@ export const data = [
         timestamp: "3:39",
         featuring: "Omar LinX",
       },
-      {
-        artistImg: "/artist/1.webp",
-        coverImg:
-          "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?q=80&w=400&fit=crop&auto=format",
-        title: "Blocks",
-        album: "Yo Yo",
-        date: "15 April 2025",
-        music: "/music2.mp3",
-        location: "Italy",
-        hear: "1,634,754 monthly listeners",
-        timestamp: "2:45",
-      },
     ],
   },
   {
@@ -142,32 +130,6 @@ export const data = [
       {
         artistImg: "/artist/2.webp",
         coverImg:
-          "https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=400&fit=crop&auto=format",
-        title: "Stay",
-        album: "Yo Yo",
-        date: "15 April 2025",
-        music: "/music1.mp3",
-        location: "Norway",
-        hear: "2,987,213 monthly listeners",
-        timestamp: "3:58",
-        featuring: "Maty Noyes",
-      },
-      {
-        artistImg: "/artist/2.webp",
-        coverImg:
-          "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?q=80&w=400&fit=crop&auto=format",
-        title: "Born to Be Yours",
-        album: "Yo Yo",
-        date: "15 April 2025",
-        music: "/music2.mp3",
-        location: "Norway",
-        hear: "2,987,213 monthly listeners",
-        timestamp: "3:13",
-        featuring: "Imagine Dragons",
-      },
-      {
-        artistImg: "/artist/2.webp",
-        coverImg:
           "https://images.unsplash.com/photo-1534982841079-afde227ada8f?q=80&w=400&fit=crop&auto=format",
         title: "Remind Me to Forget",
         album: "Yo Yo",
@@ -181,8 +143,7 @@ export const data = [
     ],
   },
   {
-    coverImg:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=400&fit=crop&auto=format",
+    coverImg: "/hero/h2.webp",
     artistImg: "/artist/3.webp",
     title: "Starboy",
     author: "The Weeknd",

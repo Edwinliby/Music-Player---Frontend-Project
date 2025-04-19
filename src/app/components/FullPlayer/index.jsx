@@ -1,42 +1,59 @@
 'use client';
 
-import Image from 'next/image';
+import { useMusicPlayer } from '@/context/MusicPlayerContext';
+import { useEffect, useRef, useState } from 'react';
 import {
-  Pause,
-  Play,
-  SkipBack,
-  SkipForward,
-  Heart,
-  Shuffle,
-  Repeat,
-  Volume1,
-  VolumeX,
-  X,
+  Play, Pause, SkipForward, SkipBack, Heart, 
+  Volume1, VolumeX, Shuffle, X, Repeat
 } from 'lucide-react';
-import { useEffect, useRef, useState, useCallback } from 'react';
-import WaveSurfer from 'wavesurfer.js';
 import { motion } from 'framer-motion';
+import ColorThief from 'colorthief';
 
-export default function FullPlayer({
-  song,
-  toggleFullPlayer,
-  onNext,
-  onPrev,
-  isPlayingProp,
-  onTogglePlay,
-}) {
+const FullPlayer = () => {
+  const {
+    currentSong,
+    isPlaying, handleTogglePlay,
+    nextSong, prevSong,
+    volume, setVolume,
+    isMuted, setIsMuted,
+    likedSongs, toggleLike,
+    isShuffle, toggleShuffle,
+    isFullPlayerOpen, setIsFullPlayerOpen,
+    currentTime, duration,
+    loopMode, toggleLoop,
+    waveformContainer, initWaveSurfer
+  } = useMusicPlayer();
+
   const waveformRef = useRef(null);
-  const wavesurferRef = useRef(null);
-  const isWaveformReady = useRef(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [liked, setLiked] = useState(false);
-  const [shuffleMode, setShuffleMode] = useState(false); // Shuffle mode state
-  const [loopMode, setLoopMode] = useState(false); // Loop mode state
-  const [playOnLoad, setPlayOnLoad] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
+  const [bgGradient, setBgGradient] = useState('');
+
+  useEffect(() => {
+    if (!currentSong?.coverImg) return;
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = currentSong.coverImg;
+
+    img.onload = () => {
+      const colorThief = new ColorThief();
+      const [r, g, b] = colorThief.getColor(img);
+
+      // Slightly brighten each RGB component
+      const brighten = (value, factor = 1.2) =>
+        Math.min(Math.floor(value * factor), 255);
+
+      const br = brighten(r);
+      const bg = brighten(g);
+      const bb = brighten(b);
+
+      const base = `rgb(${br}, ${bg}, ${bb})`;
+      const middle = `rgba(${br}, ${bg}, ${bb},.8)`;
+      const soft = `rgba(${br}, ${bg}, ${bb},.9)`;
+
+      setBgGradient(`radial-gradient(circle at 50% 20%, ${base}, ${middle}, ${soft})`);
+    };
+  }, [currentSong]);
+
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -44,189 +61,78 @@ export default function FullPlayer({
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
-  const handleKeyDown = useCallback((e) => {
-    if (e.code === 'Space') {
-      e.preventDefault();
-      togglePlay();
+  useEffect(() => {
+    if (waveformRef.current) {
+      waveformContainer.current = waveformRef.current;
+      initWaveSurfer(waveformRef.current);
     }
   }, []);
 
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        handleTogglePlay();
+      }
+    };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
+  }, [handleTogglePlay]);
 
-  useEffect(() => {
-    if (!song?.music || !waveformRef.current) return;
-
-    let aborted = false;
-
-    const ws = WaveSurfer.create({
-      container: waveformRef.current,
-      waveColor: '#D9D9D9',
-      progressColor: '#13CA35',
-      height: 30,
-      barWidth: 2,
-      responsive: true,
-      normalize: true,
-      cursorColor: 'transparent',
-    });
-
-    wavesurferRef.current = ws;
-
-    ws.on('play', () => setIsPlaying(true));
-    ws.on('pause', () => setIsPlaying(false));
-    ws.setVolume(isMuted ? 0 : volume);
-
-    ws.on('ready', () => {
-      if (aborted) return;
-      isWaveformReady.current = true;
-      setDuration(ws.getDuration());
-      if (playOnLoad) {
-        ws.play();
-      }
-    });
-
-    ws.on('audioprocess', () => {
-      if (aborted) return;
-      setCurrentTime(ws.getCurrentTime());
-    });
-
-    ws.on('seek', () => {
-      if (aborted) return;
-      setCurrentTime(ws.getCurrentTime());
-    });
-
-    ws.on('finish', () => {
-      if (aborted) return;
-      if (shuffleMode) {
-        onNext('shuffle');
-      } else {
-        onNext();
-      }
-      setPlayOnLoad(true);
-    });
-
-    try {
-      ws.load(song.music);
-    } catch (e) {
-      console.error('Error loading song:', e);
-    }
-
-    return () => {
-      aborted = true;
-      isWaveformReady.current = false;
-      ws.destroy();
-    };
-  }, [song?.music]);
-
-  useEffect(() => {
-    setLiked(false);
-  }, [song]);
-
-  useEffect(() => {
-    if (wavesurferRef.current) {
-      wavesurferRef.current.setVolume(isMuted ? 0 : volume);
-    }
-  }, [volume, isMuted]);
-
-  const togglePlay = () => {
-    if (!wavesurferRef.current) return;
-
-    if (isWaveformReady.current) {
-      wavesurferRef.current.playPause();
-    } else {
-      setPlayOnLoad(true);
-    }
-
-    onTogglePlay();
-  };
-
-  const toggleMute = () => setIsMuted((prev) => !prev);
-
-  const handleVolumeChange = (e) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-    if (newVolume > 0) setIsMuted(false);
-  };
-
-  const toggleLike = () => setLiked((prev) => !prev);
-
-  const handleNext = () => {
-    setPlayOnLoad(true);
-    onNext?.(shuffleMode ? 'shuffle' : loopMode ? 'loop' : 'normal');
-  };
-
-  const handlePrev = () => {
-    setPlayOnLoad(true);
-    onPrev?.();
-  };
-
-  useEffect(() => {
-    if (!wavesurferRef.current || !isWaveformReady.current) return;
-    if (isPlayingProp) {
-      wavesurferRef.current.play();
-    } else {
-      wavesurferRef.current.pause();
-    }
-  }, [isPlayingProp]);
-
-  useEffect(() => {
-    setIsPlaying(isPlayingProp);
-  }, [isPlayingProp]);
+  if (!isFullPlayerOpen || !currentSong) return null;
 
   return (
-    <div className="absolute z-[99] inset-0 w-full h-full bg-white p-6 flex flex-col justify-center items-center gap-8">
-      <button onClick={toggleFullPlayer} className="absolute top-6 right-6 text-2xl">
-        <X />
+    <div
+      style={{ background: bgGradient, }}
+      className="fixed inset-0 backdrop-blur-3xl text-white z-[9999] p-6 flex flex-col gap-16 items-center justify-center transition-all duration-700 setBgGradient('radial-gradient(circle at center, #2e2e2e, #1a1a1a)');"
+    >
+      <button
+        onClick={() => setIsFullPlayerOpen(false)}
+        className="absolute top-4 right-4 text-white hover:text-gray-500"
+      >
+        <X size={28} />
       </button>
 
-      <div className="flex flex-col items-center gap-6">
-        <Image
-          src={song.coverImg}
-          alt={song.title}
-          width={300}
-          height={300}
-          className="rounded-lg object-cover shadow-lg"
-        />
-        <div className="text-center">
-          <h2 className="text-xl font-bold">{song.title}</h2>
-          <p className="text-gray-600">{song.author}</p>
+      <div className="flex flex-col items-center text-center">
+        <div className='w-60 h-60 rounded-xl shadow-lg overflow-hidden'>
+          <img src={currentSong.coverImg} alt={currentSong.title} className="w-full h-full object-cover" />
         </div>
+        <h1 className="text-3xl font-bold mt-4">{currentSong.title}</h1>
+        <p className="text-lg text-gray-400">{currentSong.author}</p>
       </div>
 
-      <div className="flex flex-col items-center gap-8 w-fit xl:w-full xl:max-w-2xl mx-auto">
+      {/* Waveform */}
+      <div className="flex flex-col-reverse items-center gap-8 w-full h-fit xl:w-full xl:max-w-2xl mx-auto">
+        <div className="flex items-center gap-6">
+          <SkipBack onClick={prevSong} className="cursor-pointer" />
+          <span
+            onClick={handleTogglePlay}
+            className="flex items-center justify-center w-16 h-16 shadow-md rounded-full cursor-pointer text-black bg-white"
+          >
+            {isPlaying ? <Pause size={28} /> : <Play size={28} />}
+          </span>
+          <SkipForward onClick={nextSong} className="cursor-pointer" />
+        </div>
         {/* Wave Surfer */}
-        <div className="hidden xl:flex items-center w-full">
-          <span className="text-xs text-gray-600 min-w-[40px]">
+        <div className="flex items-center w-full text-white">
+          <span className="text-xs min-w-[40px]">
             {formatTime(currentTime)}
           </span>
           <div ref={waveformRef} className="flex-1 h-fit cursor-pointer" />
-          <span className="text-xs text-gray-600 min-w-[40px] text-right">
+          <span className="text-xs min-w-[40px] text-right">
             {formatTime(duration)}
           </span>
         </div>
-        <div className="flex items-center gap-4">
-          <SkipBack size={26} onClick={handlePrev} className="cursor-pointer" />
-          <motion.span
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1 }}
-            onClick={togglePlay}
-            className="flex items-center justify-center w-15 h-15 shadow-md rounded-full cursor-pointer bg-white"
-          >
-            {isPlaying ? <Pause size={35} /> : <Play size={35} />}
-          </motion.span>
-          <SkipForward size={26} onClick={handleNext} className="cursor-pointer" />
-        </div>
       </div>
 
-      <div className="flex items-center gap-4">
+      {/* Controls */}
+      <div className="flex items-center justify-end gap-4">
         {/* Shuffle */}
         <motion.button
           whileTap={{ scale: 0.8 }}
           whileHover={{ scale: 1.2 }}
-          onClick={() => setShuffleMode(!shuffleMode)}
-          className={`cursor-pointer ${shuffleMode ? 'text-green-500' : 'text-gray-400'}`}
+          title="Toggle Shuffle" onClick={toggleShuffle}
+          className={`cursor-pointer ${isShuffle ? 'text-green-500' : 'text-gray-400'}`}
         >
           <Shuffle size={20} />
         </motion.button>
@@ -235,8 +141,8 @@ export default function FullPlayer({
         <motion.button
           whileTap={{ scale: 0.8 }}
           whileHover={{ scale: 1.2 }}
-          onClick={() => setLoopMode(!loopMode)}
-          className={`cursor-pointer hidden md:block ${loopMode ? 'text-green-500' : 'text-gray-400'}`}
+          onClick={toggleLoop}
+          className={`cursor-pointer ${loopMode ? 'text-green-500' : 'text-gray-400'}`}
         >
           <Repeat size={20} />
         </motion.button>
@@ -245,10 +151,11 @@ export default function FullPlayer({
         <motion.div
           whileTap={{ scale: 0.8 }}
           whileHover={{ scale: 1.2 }}
-          onClick={toggleLike}
+          title="Toggle Like"
+          onClick={() => toggleLike(currentSong.title)}
           className="cursor-pointer"
         >
-          {liked ? (
+          {likedSongs.includes(currentSong.title) ? (
             <Heart className="text-red-500 fill-red-500" size={20} />
           ) : (
             <Heart className="text-gray-400" size={20} />
@@ -256,8 +163,8 @@ export default function FullPlayer({
         </motion.div>
 
         {/* Volume */}
-        <div className="hidden md:flex items-center gap-2">
-          <span onClick={toggleMute} className="cursor-pointer">
+        <div className="flex items-center gap-2">
+          <span onClick={() => setIsMuted(!isMuted)} className="cursor-pointer">
             {isMuted || volume === 0 ? <VolumeX size={20} /> : <Volume1 size={20} />}
           </span>
           <input
@@ -266,12 +173,14 @@ export default function FullPlayer({
             max={1}
             step={0.01}
             value={volume}
-            onChange={handleVolumeChange}
-            className="custom-slider w-18 cursor-pointer"
+            onChange={(e) => setVolume(parseFloat(e.target.value))}
+            className="custom-slider cursor-pointer"
           />
         </div>
       </div>
 
     </div>
   );
-}
+};
+
+export default FullPlayer;

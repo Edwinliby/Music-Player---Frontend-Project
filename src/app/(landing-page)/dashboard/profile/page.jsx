@@ -115,7 +115,7 @@ const SpotifyUserPage = () => {
                     {activeTab === 'topTracks' && (
                         <div>
                             <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-2xl font-bold">Top Tracks</h2>
+                                <h2 className="text-xl font-bold">Top Tracks of the month</h2>
                                 <button className="text-gray-800 text-sm font-medium">See All</button>
                             </div>
 
@@ -192,7 +192,7 @@ const SpotifyUserPage = () => {
                     {activeTab === 'artists' && (
                         <div>
                             <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-2xl font-bold">Top Artists</h2>
+                                <h2 className="text-xl font-bold">Top Artists of the month</h2>
                                 <a href='/dashboard/artists' className="text-gray-800 text-sm font-medium">See All</a>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 mb-10 md:mb-8">

@@ -2,13 +2,12 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Bell, ExternalLink } from 'lucide-react'
+import { Bell } from 'lucide-react'
 
 export default function Profile({ isOpen, setIsOpen }) {
     const [isMenu, setIsMenu] = useState(false)
     const dropdownRef = useRef(null)
 
-    // Handle clicks outside the dropdown to close it
     useEffect(() => {
         function handleClickOutside(event) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -24,7 +23,7 @@ export default function Profile({ isOpen, setIsOpen }) {
 
     return (
         <div className='z-50 absolute top-2 right-2 md:top-auto md:bottom-4 md:left-4 w-fit h-fit' ref={dropdownRef}>
-            <div className='relative flex items-center gap-4'>
+            <div className={`relative flex items-center gap-2 md:gap-4 ${isOpen ? 'flex-row-reverse md:flex-row' : 'flex-col-reverse'}`}>
                 <motion.div
                     whileTap={{ scale: 0.9 }}
                     whileHover={{ scale: 1.1 }}
@@ -33,15 +32,12 @@ export default function Profile({ isOpen, setIsOpen }) {
                 >
                     <img src="/form.jpg" draggable={false} alt="profile-pic" className='rounded-full w-9 h-9 object-cover' />
                 </motion.div>
-                {isOpen && (
-                    <motion.div
-                        whileTap={{ scale: 0.9 }}
-                        whileHover={{ scale: 1.1 }}
-                        className="hidden md:block"
-                    >
-                        <Bell className="text-white hover:opacity-80" size={18} />
-                    </motion.div>
-                )}
+                <motion.div
+                    whileTap={{ scale: 0.9 }}
+                    whileHover={{ scale: 1.1 }}
+                >
+                    <Bell className="text-black md:text-white hover:opacity-80" size={18} />
+                </motion.div>
 
                 {isMenu && (
                     <div className="absolute right-2 top-14 bottom-auto md:top-auto md:left-0 md:bottom-16 w-40 bg-gray-900 shadow shadow-gray-700 text-white rounded z-10">

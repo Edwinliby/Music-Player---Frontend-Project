@@ -73,7 +73,7 @@ export default function Page() {
                                                 <span className="absolute left-4 top-4 text-sm md:text-base font-semibold text-gray-900">
                                                     {item}
                                                 </span>
-                                                <img src="/bg.webp" alt="dummy" draggable={false} className='rounded w-14 h-14 absolute bottom-4 -right-2 -rotate-12' />
+                                                <img src={`/hero/h${index + 1}.webp`} alt="dummy" draggable={false} className='rounded w-14 h-14 absolute object-cover bottom-4 -right-2 -rotate-12' />
                                             </motion.div>
                                         )
                                     })
