@@ -66,11 +66,11 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             </motion.div>
 
             <div className='md:hidden bg-white w-full fixed bottom-0 left-0 h-14 z-50 flex justify-between items-center px-4'>
-                <a href="/dashboard" className="w-14 bg-red flex flex-col items-center"><House size={25} /> <span className='text-[.6rem]'>Home</span></a>
-                <a href="/dashboard/explore" className="w-14 bg-red flex flex-col items-center"><AudioWaveform size={25} /> <span className='text-[.6rem]'>Explore</span></a>
+                <a href="/dashboard" aria-label='Home' className="w-14 bg-red flex flex-col items-center"><House size={25} /> <span className='text-[.6rem]'>Home</span></a>
+                <a href="/dashboard/explore" aria-label='Explore' className="w-14 bg-red flex flex-col items-center"><AudioWaveform size={25} /> <span className='text-[.6rem]'>Explore</span></a>
                 {/* <a href="/dashboard/library" className="w-14 bg-red flex flex-col items-center"><Library size={25} /> <span className='text-[.6rem]'>Library</span></a> */}
-                <a href="/dashboard/artists" className="w-14 bg-red flex flex-col items-center"><Music size={25} /> <span className='text-[.6rem]'>Artists</span></a>
-                <a href="/dashboard/podcasts" className="w-14 bg-red flex flex-col items-center"><Podcast size={25} /> <span className='text-[.6rem]'>Podcasts</span></a>
+                <a href="/dashboard/artists" aria-label='Artists' className="w-14 bg-red flex flex-col items-center"><Music size={25} /> <span className='text-[.6rem]'>Artists</span></a>
+                <a href="/dashboard/podcasts" aria-label='Podcasts' className="w-14 bg-red flex flex-col items-center"><Podcast size={25} /> <span className='text-[.6rem]'>Podcasts</span></a>
             </div>
         </>
     )

@@ -127,6 +127,7 @@ export default function NowPlaying({ song, isPlaying }) {
                     />
                     <div className='z-20 absolute bottom-2 right-2'>
                         <motion.button
+                            aria-label='Like'
                             whileTap={{ scale: 0.8 }}
                             whileHover={{ scale: 1.2 }}
                             onClick={toggleLike}
@@ -160,6 +161,7 @@ export default function NowPlaying({ song, isPlaying }) {
                         <div className='flex items-center justify-between gap-2'>
                             <b>About the Artist</b>
                             <button
+                                aria-label='Follow'
                                 onClick={FollowToggle}
                                 className={`text-xs px-4 py-1.5 rounded-full transition duration-200 ${isFollowing
                                     ? 'bg-green-500 text-white hover:bg-green-400'

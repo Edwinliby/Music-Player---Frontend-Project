@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { ExternalLink, Volume2, Shield, Bell, Clock, Headphones, Download, Database, Moon } from 'lucide-react';
+import { ExternalLink, Volume2, Shield, Bell, Headphones } from 'lucide-react';
 import NowPlaying from '../_components/NowPlaying';
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
 
@@ -10,11 +10,11 @@ const SettingsPage = () => {
 
     return (
         <div className="h-full w-full flex justify-between">
-            <div className='w-full lg:w-[75%] flex flex-col'>
+            <div className='w-full lg:w-[73%] xl:w-[78%] flex flex-col'>
                 <div className="custom-scrollbar overflow-x-hidden p-4 md:p-6">
                     <div className="max-w-4xl mx-auto">
                         <div className="mb-8 sm:mb-10">
-                            <h1 className="text-3xl sm:text-4xl font-bold">Settings</h1>
+                            <h1 className="text-3xl sm:text-4xl font-extrabold">Settings</h1>
                         </div>
 
                         {/* Account Section */}
@@ -212,7 +212,7 @@ const SettingsPage = () => {
                     </div>
                 </div>
             </div>
-            <div className='hidden lg:block w-[14rem] xl:w-[25%]'>
+            <div className='hidden lg:block w-[27%] xl:w-[22%]'>
                 <NowPlaying song={currentSong} isPlaying={isPlaying} />
             </div>
         </div>

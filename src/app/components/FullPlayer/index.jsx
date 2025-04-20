@@ -92,7 +92,7 @@ const FullPlayer = () => {
         onClick={() => setIsFullPlayerOpen(false)}
         className="absolute top-4 right-4 text-white hover:text-gray-500"
       >
-        <Minimize size={28} />
+        <Minimize size={24} />
       </button>
 
       <div className="flex flex-col items-center text-center">
@@ -123,6 +123,7 @@ const FullPlayer = () => {
           {/* <div ref={waveformRef} className="w-full h-16 z-50 cursor-pointer" /> */}
 
           <input
+            aria-label='Progress Bar'
             type="range"
             min={0}
             max={duration}
@@ -150,6 +151,7 @@ const FullPlayer = () => {
       <div className="flex items-center justify-end gap-4">
         {/* Shuffle */}
         <motion.button
+          aria-label='Toggle Shuffle'
           whileTap={{ scale: 0.8 }}
           whileHover={{ scale: 1.2 }}
           title="Toggle Shuffle" onClick={toggleShuffle}
@@ -160,6 +162,7 @@ const FullPlayer = () => {
 
         {/* Loop */}
         <motion.button
+          aria-label='Toggle Loop'
           whileTap={{ scale: 0.8 }}
           whileHover={{ scale: 1.2 }}
           onClick={toggleLoop}
@@ -189,6 +192,7 @@ const FullPlayer = () => {
             {isMuted || volume === 0 ? <VolumeX size={20} /> : <Volume1 size={20} />}
           </span>
           <input
+            aria-label='Volume Slider'
             type="range"
             min={0}
             max={1}

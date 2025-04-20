@@ -137,6 +137,7 @@ const MusicBar = () => {
             <div className="flex items-center justify-end gap-4 md:flex-1">
                 {/* Shuffle */}
                 <motion.button
+                    aria-label='Toggle Shuffle'
                     whileTap={{ scale: 0.8 }}
                     whileHover={{ scale: 1.2 }}
                     title="Toggle Shuffle" onClick={toggleShuffle}
@@ -147,6 +148,7 @@ const MusicBar = () => {
 
                 {/* Loop */}
                 <motion.button
+                    aria-label='Toggle Loop'
                     whileTap={{ scale: 0.8 }}
                     whileHover={{ scale: 1.2 }}
                     onClick={toggleLoop}
@@ -176,6 +178,7 @@ const MusicBar = () => {
                         {isMuted || volume === 0 ? <VolumeX size={20} /> : <Volume1 size={20} />}
                     </span>
                     <input
+                        aria-label='Volume'
                         type="range"
                         min={0}
                         max={1}

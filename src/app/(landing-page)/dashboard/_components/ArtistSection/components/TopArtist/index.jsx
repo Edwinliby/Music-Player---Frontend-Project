@@ -48,6 +48,7 @@ export default function Artist({ data }) {
                 {/* Scroll Buttons */}
                 {showLeftFade && (
                     <button
+                        aria-label="Scroll left"
                         onClick={() => scroll('left')}
                         className="absolute left-2 z-20 top-1/2 -translate-y-1/2 p-1 bg-white rounded-full shadow hover:bg-gray-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
@@ -56,6 +57,7 @@ export default function Artist({ data }) {
                 )}
                 {showRightFade && (
                     <button
+                        aria-label="Scroll right"
                         onClick={() => scroll('right')}
                         className="absolute right-2 z-20 top-1/2 -translate-y-1/2 p-1 bg-white rounded-full shadow hover:bg-gray-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >

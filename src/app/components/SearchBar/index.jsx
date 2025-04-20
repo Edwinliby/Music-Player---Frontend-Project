@@ -42,11 +42,12 @@ export default function SearchBar({ className }) {
   return (
     <>
       <div className={`h-[4rem] p-4 w-full flex items-center text-gray-400 gap-4 cursor-pointer shadow ${className ? className : ''}`}>
-        <motion.a whileHover={{ color: "#1DB954" }} whileTap={{ scale: 0.9, color: "#1DB954" }} className='cursor-pointer hidden md:block' href='/dashboard'><House /></motion.a>
+        <motion.a whileHover={{ color: "#1DB954" }} whileTap={{ scale: 0.9, color: "#1DB954" }} aria-label='Home' className='cursor-pointer hidden md:block' href='/dashboard'><House /></motion.a>
         <div className='flex items-center justify-between gap-2 w-full group'>
           <Search />
           <input
             type="text"
+            aria-label='Search'
             placeholder="What do you want to play?"
             className="bg-transparent outline-none text-sm font-medium text-black placeholder-gray-400 w-full"
           />

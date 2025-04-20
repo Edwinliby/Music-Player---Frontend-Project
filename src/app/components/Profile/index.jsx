@@ -32,28 +32,30 @@ export default function Profile({ isOpen, setIsOpen }) {
                 >
                     <img src="/form.jpg" draggable={false} alt="profile-pic" className='rounded-full w-9 h-9 object-cover' />
                 </motion.div>
-                <motion.div
+                <motion.a
+                    aria-label='Notifications'
+                    href='/dashboard/feed'
                     whileTap={{ scale: 0.9 }}
                     whileHover={{ scale: 1.1 }}
                 >
                     <Bell className="text-black md:text-white hover:opacity-80" size={18} />
-                </motion.div>
+                </motion.a>
 
                 {isMenu && (
                     <div className="absolute right-2 top-14 bottom-auto md:top-auto md:left-0 md:bottom-16 w-40 bg-gray-900 shadow shadow-gray-700 text-white rounded z-10">
                         <div className="py-1">
-                            <a href="/dashboard/profile" className="flex justify-between items-center px-4 py-3 hover:bg-gray-800">
+                            <a href="/dashboard/profile" aria-label='Profile' className="flex justify-between items-center px-4 py-3 hover:bg-gray-800">
                                 Profile
                             </a>
                             <div className="border-t border-t-gray-700 my-1"></div>
-                            <a href="#" className="flex justify-between items-center px-4 py-3 hover:bg-gray-800">
+                            <a href="#" aria-label='Support' className="flex justify-between items-center px-4 py-3 hover:bg-gray-800">
                                 Support
                             </a>
-                            <a href="/dashboard/settings" className="block px-4 py-3 hover:bg-gray-800">
+                            <a href="/dashboard/settings" aria-label='Settings' className="block px-4 py-3 hover:bg-gray-800">
                                 Settings
                             </a>
                             <div className="border-t border-t-gray-700 my-1"></div>
-                            <a href="/" className="block px-4 py-3 hover:bg-gray-800">
+                            <a href="/" aria-label='Log out' className="block px-4 py-3 hover:bg-gray-800">
                                 Log out
                             </a>
                         </div>
