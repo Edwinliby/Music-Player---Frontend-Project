@@ -2,6 +2,20 @@
 
 import { motion } from "framer-motion"
 
+const containerVariants = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.3,
+        },
+    },
+}
+
+const imageVariants = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+}
+
 export default function AboutSection() {
     return (
         <div id="features" className="flex flex-col">
@@ -54,17 +68,29 @@ export default function AboutSection() {
             </section>
 
             <section className="h-fit w-full flex flex-col justify-center items-center gap-4 overflow-hidden py-14">
+                {/* Top staggered image group */}
                 <motion.div
                     className="relative -right-[6rem] flex items-center justify-center gap-4"
-                    initial={{ opacity: 0, x: 100 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="show"
                     viewport={{ once: true }}
                 >
-                    <img src="/hero/s1.webp" alt="platform-img" className="w-full md:h-[28rem] object-cover" />
-                    <img src="/hero/s2.webp" alt="platform-img" className="w-full md:h-[28rem] object-cover relative -bottom-[5rem]" />
+                    <motion.img
+                        variants={imageVariants}
+                        src="/hero/s1.webp"
+                        alt="platform-img"
+                        className="w-full md:h-[28rem] object-cover shadow rounded-2xl"
+                    />
+                    <motion.img
+                        variants={imageVariants}
+                        src="/hero/s2.webp"
+                        alt="platform-img"
+                        className="w-full md:h-[28rem] object-cover shadow rounded-2xl relative -bottom-[5rem]"
+                    />
                 </motion.div>
 
+                {/* Logo animation */}
                 <motion.img
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -76,15 +102,26 @@ export default function AboutSection() {
                     className="w-fit h-[4rem] object-contain"
                 />
 
+                {/* Bottom staggered image group */}
                 <motion.div
                     className="relative -left-[6rem] flex items-center justify-center gap-4"
-                    initial={{ opacity: 0, x: -100 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="show"
                     viewport={{ once: true }}
                 >
-                    <img src="/hero/s3.webp" alt="platform-img" className="w-full md:h-[28rem] object-cover relative -top-[5rem]" />
-                    <img src="/hero/s4.webp" alt="platform-img" className="w-full md:h-[28rem] object-cover" />
+                    <motion.img
+                        variants={imageVariants}
+                        src="/hero/s3.webp"
+                        alt="platform-img"
+                        className="w-full md:h-[28rem] object-cover shadow rounded-2xl relative -top-[5rem]"
+                    />
+                    <motion.img
+                        variants={imageVariants}
+                        src="/hero/s4.webp"
+                        alt="platform-img"
+                        className="w-full md:h-[28rem] object-cover shadow rounded-2xl"
+                    />
                 </motion.div>
             </section>
         </div>

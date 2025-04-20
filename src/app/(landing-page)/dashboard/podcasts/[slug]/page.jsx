@@ -98,7 +98,7 @@ export default function PodcastPage() {
                                 </button>
 
                                 {isDropdownOpen && (
-                                    <div className="absolute mt-2 w-40 bg-black/50 text-white backdrop-blur-xl rounded-md shadow-lg z-20">
+                                    <div className="absolute mt-2 w-40 bg-black/80 text-white backdrop-blur-2xl rounded-md shadow-lg z-20">
                                         <ul>
                                             <li
                                                 onClick={() => handleShareOption('Facebook')}

@@ -127,7 +127,7 @@ const SpotifyUserPage = () => {
                                             <th className="py-4 px-4 w-12">#</th>
                                             <th className="py-4 px-4">TITLE</th>
                                             <th className="py-4 px-4">ALBUM</th>
-                                            <th className="py-4 px-4 text-right">
+                                            <th className="py-4 px-4 text-right flex justify-end">
                                                 <Clock size={16} />
                                             </th>
                                         </tr>
